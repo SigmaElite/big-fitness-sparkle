@@ -8,7 +8,7 @@ const programs = [
   {
     icon: Activity,
     title: "Детский ОФП",
-    age: "от 3 лет",
+    age: "от 4 лет",
     description: "Общая физическая подготовка для развития силы, выносливости и координации",
     color: "from-primary to-orange-light",
   },
@@ -22,8 +22,8 @@ const programs = [
   {
     icon: Baby,
     title: "Развивающие занятия",
-    age: "от 2 лет",
-    description: "Игровые занятия для самых маленьких с элементами физкультуры",
+    age: "от 4 лет",
+    description: "Игровые занятия с элементами физкультуры и гимнастики",
     color: "from-primary to-orange-light",
   },
 ];
@@ -113,7 +113,7 @@ export const KidsPrograms = () => {
               animate={{ rotate: [-3, 3, -3] }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <p className="text-4xl font-heading font-black text-primary-foreground">2+</p>
+              <p className="text-4xl font-heading font-black text-primary-foreground">4+</p>
               <p className="text-sm text-primary-foreground/80">лет</p>
             </motion.div>
           </motion.div>

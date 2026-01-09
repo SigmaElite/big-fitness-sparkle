@@ -105,7 +105,7 @@ export const Hero = () => {
             >
               {[
                 { icon: Users, value: "4", label: "зала" },
-                { icon: Baby, value: "2+", label: "года детям" },
+                { icon: Baby, value: "4+", label: "года детям" },
                 { icon: Sparkles, value: "15+", label: "направлений" },
               ].map((stat, index) => (
                 <motion.div
@@ -155,7 +155,7 @@ export const Hero = () => {
             >
               <Baby className="w-8 h-8 text-primary mb-1" />
               <p className="text-sm font-bold text-foreground">Детям</p>
-              <p className="text-xs text-muted-foreground">от 2 лет</p>
+              <p className="text-xs text-muted-foreground">от 4 лет</p>
             </motion.div>
 
             <motion.div
