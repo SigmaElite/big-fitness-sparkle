@@ -1,18 +1,21 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Dumbbell, Heart, Zap, Music, Sparkles, Users, Flame, Moon } from "lucide-react";
-import adultsImage from "@/assets/adults-fitness.jpg";
+import { Dumbbell, Heart, Zap, Music, Moon, Sparkles, Users, Flame, Check } from "lucide-react";
 
 const programs = [
-  { icon: Heart, title: "Йога", description: "Гармония тела и разума" },
-  { icon: Zap, title: "Функциональный тренинг", description: "Сила и выносливость" },
-  { icon: Music, title: "Танцы", description: "Зумба, хип-хоп, стрип-пластика" },
-  { icon: Dumbbell, title: "Пилатес", description: "Укрепление мышц кора" },
-  { icon: Flame, title: "Кардио", description: "Сжигание калорий" },
-  { icon: Moon, title: "Stretching", description: "Растяжка и гибкость" },
-  { icon: Sparkles, title: "Body Sculpt", description: "Скульптура тела" },
-  { icon: Users, title: "Групповые тренировки", description: "Заряд энергии вместе" },
+  { icon: Heart, title: "Пилатес", description: "Укрепление кора и осанки" },
+  { icon: Zap, title: "Функц. тренинг", description: "Сила и выносливость" },
+  { icon: Moon, title: "Стретчинг", description: "Растяжка и гибкость" },
+  { icon: Sparkles, title: "Йогалатес", description: "Гармония тела и разума" },
+  { icon: Dumbbell, title: "Силовые", description: "Тонус и рельеф" },
+  { icon: Music, title: "Танцы", description: "Зумба, хип-хоп" },
+];
+
+const advantages = [
+  "Только групповые и индивидуальные занятия — никаких тренажёров!",
+  "Профессиональные сертифицированные тренеры",
+  "Малые группы до 10 человек",
+  "Индивидуальный подход к каждому",
 ];
 
 export const AdultPrograms = () => {
@@ -20,137 +23,86 @@ export const AdultPrograms = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="adults" className="py-24 bg-mint-light relative overflow-hidden" ref={ref}>
-      {/* Animated background shapes */}
-      <motion.div
-        className="absolute top-20 right-10 w-32 h-32 bg-orange/10 rounded-full blur-2xl"
-        animate={{ scale: [1, 1.3, 1], x: [0, 20, 0] }}
-        transition={{ duration: 6, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-20 left-10 w-48 h-48 bg-mint-dark/30 rounded-full blur-3xl"
-        animate={{ scale: [1.2, 1, 1.2], y: [0, -30, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
+    <section id="adults" className="py-20 bg-card relative overflow-hidden" ref={ref}>
+      <div className="container mx-auto px-4">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 bg-card rounded-full px-4 py-2 mb-6 shadow-soft"
-          >
-            <Dumbbell className="w-5 h-5 text-primary" />
-            <span className="font-semibold text-foreground">Для взрослых</span>
-          </motion.div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black mb-4">
-            <span className="text-foreground">Взрослые </span>
-            <span className="text-primary">направления</span>
+          <div className="inline-flex items-center gap-2 bg-mint-dark text-foreground px-4 py-2 mb-6">
+            <Dumbbell className="w-5 h-5" />
+            <span className="font-bold text-sm">ДЛЯ ВЗРОСЛЫХ</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-foreground mb-4">
+            15+ НАПРАВЛЕНИЙ
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Только групповые и индивидуальные занятия — никаких тренажёров! 
-            Живые тренировки с профессиональными инструкторами
+            Групповые и индивидуальные занятия с профессиональными инструкторами
           </p>
         </motion.div>
 
         {/* Programs grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
           {programs.map((program, index) => (
             <motion.div
               key={program.title}
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
-              whileHover={{ y: -10, scale: 1.05 }}
-              className="group"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+              whileHover={{ y: -5, borderColor: "hsl(var(--primary))" }}
+              className="border-2 border-border p-4 text-center hover:border-primary transition-all group cursor-pointer"
             >
-              <div className="bg-card rounded-2xl p-6 h-full shadow-soft hover:shadow-card transition-all duration-300 border-2 border-transparent hover:border-primary">
-                <motion.div
-                  className="w-14 h-14 rounded-xl bg-gradient-to-br from-mint to-mint-dark flex items-center justify-center mb-4 group-hover:bg-gradient-to-br group-hover:from-orange group-hover:to-orange-light transition-all duration-300"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <program.icon className="w-7 h-7 text-foreground group-hover:text-primary-foreground transition-colors" />
-                </motion.div>
-                <h3 className="font-heading font-bold text-lg text-foreground mb-2">{program.title}</h3>
-                <p className="text-sm text-muted-foreground">{program.description}</p>
+              <div className="w-12 h-12 bg-mint-dark mx-auto mb-3 flex items-center justify-center group-hover:bg-primary transition-colors">
+                <program.icon className="w-6 h-6 text-foreground group-hover:text-primary-foreground transition-colors" />
               </div>
+              <h3 className="font-bold text-foreground text-sm mb-1">{program.title}</h3>
+              <p className="text-xs text-muted-foreground">{program.description}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Image and CTA */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative"
-          >
-            <motion.div
-              className="rounded-3xl overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-            >
-              <img
-                src={adultsImage}
-                alt="Взрослые занятия в Big Fitness"
-                className="w-full h-auto object-cover aspect-[4/3]"
-              />
-            </motion.div>
-
-            {/* Badge */}
-            <motion.div
-              className="absolute -top-6 -right-6 bg-card rounded-2xl p-4 shadow-card"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <p className="text-2xl font-heading font-bold text-primary">15+</p>
-              <p className="text-sm text-muted-foreground">направлений</p>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-center lg:text-left"
-          >
-            <h3 className="text-2xl sm:text-3xl font-heading font-bold mb-6 text-foreground">
-              Индивидуальный подход к каждому
-            </h3>
-            <p className="text-lg text-muted-foreground mb-6">
-              В Big Fitness мы делаем ставку на качество, а не на количество. 
-              Все занятия проходят в малых группах или индивидуально, чтобы тренер мог уделить внимание каждому.
-            </p>
-            <ul className="space-y-3 mb-8">
-              {["Персональные программы", "Опытные тренеры", "Удобное расписание", "Комфортные залы"].map((item, i) => (
-                <motion.li
-                  key={item}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.8 + i * 0.1 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-3 h-3 text-primary-foreground" />
-                  </div>
-                  <span className="text-foreground font-medium">{item}</span>
-                </motion.li>
-              ))}
-            </ul>
-            <Button variant="hero" size="xl">
-              Выбрать направление
-            </Button>
-          </motion.div>
-        </div>
+        {/* Advantages */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5 }}
+          className="bg-mint-light border-2 border-primary p-8 lg:p-12"
+        >
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl font-heading font-bold text-foreground mb-6">
+                Почему выбирают нас?
+              </h3>
+              <ul className="space-y-4">
+                {advantages.map((adv, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.6 + i * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground">{adv}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+            <div className="text-center lg:text-right">
+              <p className="text-primary text-xl font-bold mb-4">
+                С нами Вы заметите результат уже через 5 занятий!
+              </p>
+              <button className="inline-block border-2 border-foreground px-8 py-4 font-bold text-foreground hover:bg-foreground hover:text-card transition-colors">
+                ЗАПИСАТЬСЯ НА
+                <br />
+                ПРОБНОЕ ЗАНЯТИЕ
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

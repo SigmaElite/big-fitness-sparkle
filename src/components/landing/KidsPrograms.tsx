@@ -1,30 +1,32 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Baby, Activity, Medal, Star, ChevronRight } from "lucide-react";
-import kidsImage from "@/assets/kids-fitness.jpg";
+import { Baby, Activity, Medal, Star, Check } from "lucide-react";
 
-const programs = [
+const kidsPrograms = [
   {
     icon: Activity,
     title: "Детский ОФП",
     age: "от 4 лет",
     description: "Общая физическая подготовка для развития силы, выносливости и координации",
-    color: "from-primary to-orange-light",
+    benefits: [
+      "Развитие всех физических качеств",
+      "Формирование правильной осанки",
+      "Укрепление иммунитета",
+      "Игровая форма занятий",
+    ],
   },
   {
     icon: Medal,
     title: "Спортивная гимнастика",
     age: "от 4 лет",
     description: "Профессиональные занятия гимнастикой с опытными тренерами",
-    color: "from-mint-dark to-mint",
-  },
-  {
-    icon: Baby,
-    title: "Развивающие занятия",
-    age: "от 4 лет",
-    description: "Игровые занятия с элементами физкультуры и гимнастики",
-    color: "from-primary to-orange-light",
+    benefits: [
+      "Развитие гибкости и пластичности",
+      "Укрепление мышечного корсета",
+      "Координация движений",
+      "Подготовка к соревнованиям",
+    ],
   },
 ];
 
@@ -33,132 +35,90 @@ export const KidsPrograms = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="kids" className="py-24 bg-card relative overflow-hidden" ref={ref}>
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-mint/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange/10 rounded-full blur-2xl" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
+    <section id="kids" className="py-20 bg-mint-light relative overflow-hidden" ref={ref}>
+      <div className="container mx-auto px-4">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 bg-mint rounded-full px-4 py-2 mb-6"
-          >
-            <Baby className="w-5 h-5 text-primary" />
-            <span className="font-semibold text-foreground">Для детей</span>
-          </motion.div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black mb-4">
-            <span className="text-foreground">Детские </span>
-            <span className="text-primary">направления</span>
+          <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 mb-6">
+            <Baby className="w-5 h-5" />
+            <span className="font-bold text-sm">ДЕТСКИЕ НАПРАВЛЕНИЯ</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-foreground mb-4">
+            ЗАНЯТИЯ ДЛЯ ДЕТЕЙ ОТ 4 ЛЕТ
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Растим чемпионов с самого раннего возраста! Профессиональные тренеры и безопасные залы
+            Растим здоровых и активных детей! Профессиональные тренеры и безопасные залы
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative order-2 lg:order-1"
-          >
+        {/* Programs grid */}
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          {kidsPrograms.map((program, index) => (
             <motion.div
-              className="rounded-3xl overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-            >
-              <img
-                src={kidsImage}
-                alt="Детские занятия в Big Fitness"
-                className="w-full h-auto object-cover aspect-[4/3]"
-              />
-            </motion.div>
-
-            {/* Floating stars */}
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                style={{
-                  top: `${20 + i * 15}%`,
-                  left: i % 2 === 0 ? "-5%" : "95%",
-                }}
-                animate={{
-                  y: [0, -10, 0],
-                  rotate: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 3 + i,
-                  repeat: Infinity,
-                  delay: i * 0.3,
-                }}
-              >
-                <Star className="w-6 h-6 text-primary fill-primary" />
-              </motion.div>
-            ))}
-
-            {/* Age badge */}
-            <motion.div
-              className="absolute -bottom-6 -right-6 bg-primary rounded-2xl p-6 shadow-orange"
-              animate={{ rotate: [-3, 3, -3] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              <p className="text-4xl font-heading font-black text-primary-foreground">4+</p>
-              <p className="text-sm text-primary-foreground/80">лет</p>
-            </motion.div>
-          </motion.div>
-
-          {/* Programs list */}
-          <div className="space-y-6 order-1 lg:order-2">
-            {programs.map((program, index) => (
-              <motion.div
-                key={program.title}
-                initial={{ opacity: 0, x: 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
-                className="group"
-              >
-                <motion.div
-                  className="bg-card border-2 border-mint rounded-2xl p-6 flex gap-4 items-start hover:border-primary hover:shadow-card transition-all duration-300"
-                  whileHover={{ x: 10, scale: 1.02 }}
-                >
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${program.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
-                    <program.icon className="w-7 h-7 text-primary-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-heading font-bold text-foreground">{program.title}</h3>
-                      <span className="px-3 py-1 bg-mint rounded-full text-xs font-semibold text-foreground">{program.age}</span>
-                    </div>
-                    <p className="text-muted-foreground">{program.description}</p>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
-                </motion.div>
-              </motion.div>
-            ))}
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={program.title}
+              initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.9 }}
-              className="pt-4"
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+              className="bg-card border-2 border-primary p-8"
             >
-              <Button variant="hero" size="xl" className="w-full sm:w-auto">
-                Записать ребёнка
-              </Button>
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-16 h-16 bg-primary flex items-center justify-center flex-shrink-0">
+                  <program.icon className="w-8 h-8 text-primary-foreground" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-heading font-bold text-foreground mb-1">
+                    {program.title}
+                  </h3>
+                  <span className="inline-block bg-mint-dark text-foreground text-sm font-bold px-3 py-1">
+                    {program.age}
+                  </span>
+                </div>
+              </div>
+              
+              <p className="text-muted-foreground mb-6">{program.description}</p>
+              
+              <ul className="space-y-3">
+                {program.benefits.map((benefit, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
-          </div>
+          ))}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6 }}
+          className="text-center"
+        >
+          <p className="text-lg text-foreground mb-4">
+            Запишите ребёнка на пробное занятие
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-xl mx-auto">
+            <input
+              type="tel"
+              placeholder="Введите ваш телефон"
+              className="flex-1 px-4 py-3 border-2 border-border rounded-none bg-card text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none transition-colors"
+            />
+            <Button 
+              variant="default" 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-none font-bold"
+            >
+              ЗАПИСАТЬ РЕБЁНКА
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
