@@ -1,33 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Clock, MessageCircle, Instagram, Send } from "lucide-react";
-
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "Адрес",
-    value: "ЖК Новая Боровая",
-    subvalue: "Минск, ул. Примерная, 1",
-  },
-  {
-    icon: Phone,
-    title: "Телефон",
-    value: "+375 29 123-45-67",
-    subvalue: "Звоните с 9:00 до 21:00",
-  },
-  {
-    icon: Clock,
-    title: "Часы работы",
-    value: "Пн-Пт: 7:00 - 22:00",
-    subvalue: "Сб-Вс: 9:00 - 20:00",
-  },
-];
+import { MapPin, Phone, Clock, Instagram, MessageCircle, Send } from "lucide-react";
 
 const socials = [
-  { icon: Instagram, label: "Instagram", href: "#" },
-  { icon: MessageCircle, label: "Viber", href: "#" },
-  { icon: Send, label: "Telegram", href: "#" },
+  { icon: Instagram, label: "Instagram", href: "#", color: "bg-gradient-to-br from-purple-500 to-pink-500" },
+  { icon: MessageCircle, label: "VK", href: "#", color: "bg-blue-500" },
+  { icon: Send, label: "Telegram", href: "#", color: "bg-sky-500" },
 ];
 
 export const Contact = () => {
@@ -35,163 +13,66 @@ export const Contact = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contacts" className="py-24 bg-gradient-to-br from-mint-light via-card to-mint-light relative overflow-hidden" ref={ref}>
-      {/* Animated shapes */}
-      <motion.div
-        className="absolute top-10 left-10 w-40 h-40 bg-orange/10 rounded-full blur-3xl"
-        animate={{ scale: [1, 1.4, 1], rotate: [0, 90, 0] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-10 right-10 w-60 h-60 bg-mint-dark/30 rounded-full blur-3xl"
-        animate={{ scale: [1.2, 1, 1.2] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
+    <section id="contacts" className="py-20 bg-card" ref={ref}>
+      <div className="container mx-auto px-4">
+        {/* Social section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 bg-primary rounded-full px-4 py-2 mb-6 shadow-orange"
-          >
-            <MapPin className="w-5 h-5 text-primary-foreground" />
-            <span className="font-semibold text-primary-foreground">Контакты</span>
-          </motion.div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black mb-4">
-            <span className="text-foreground">Ждём вас в </span>
-            <span className="text-primary">Big Fitness!</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Приходите на пробное занятие — первое посещение бесплатно!
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Contact cards */}
-          <div className="space-y-6">
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={info.title}
-                initial={{ opacity: 0, x: -50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
-                whileHover={{ x: 10, scale: 1.02 }}
-                className="group"
-              >
-                <div className="bg-card rounded-2xl p-6 flex items-center gap-5 shadow-soft hover:shadow-card transition-all duration-300 border-2 border-transparent hover:border-primary">
-                  <motion.div
-                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange to-orange-light flex items-center justify-center flex-shrink-0"
-                    whileHover={{ rotate: 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <info.icon className="w-8 h-8 text-primary-foreground" />
-                  </motion.div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">{info.title}</p>
-                    <p className="text-xl font-heading font-bold text-foreground">{info.value}</p>
-                    <p className="text-sm text-muted-foreground">{info.subvalue}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Social links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.8 }}
-              className="pt-6"
-            >
-              <p className="text-sm text-muted-foreground mb-4">Мы в соцсетях:</p>
-              <div className="flex gap-4">
-                {socials.map((social, index) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    className="w-12 h-12 rounded-xl bg-mint flex items-center justify-center hover:bg-primary group transition-colors duration-300"
-                    whileHover={{ y: -5, scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.9 + index * 0.1, type: "spring" }}
-                  >
-                    <social.icon className="w-5 h-5 text-foreground group-hover:text-primary-foreground transition-colors" />
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
+          <div className="border-4 border-primary inline-block px-12 py-8 mb-8">
+            <h2 className="text-2xl sm:text-3xl font-heading font-black text-primary">
+              СЛЕДУЙТЕ ЗА НАМИ
+            </h2>
           </div>
 
-          {/* Map / CTA */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="bg-card rounded-3xl p-8 shadow-card border-2 border-mint">
-              <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
-                Записаться на пробное занятие
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Оставьте заявку, и мы свяжемся с вами для уточнения деталей
-              </p>
-              
-              <form className="space-y-4">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Ваше имя"
-                    className="w-full px-4 py-3 rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="tel"
-                    placeholder="Телефон"
-                    className="w-full px-4 py-3 rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground"
-                  />
-                </div>
-                <div>
-                  <select className="w-full px-4 py-3 rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors text-muted-foreground">
-                    <option value="">Выберите направление</option>
-                    <option value="kids-ofp">Детский ОФП</option>
-                    <option value="kids-gym">Спортивная гимнастика</option>
-                    <option value="yoga">Йога</option>
-                    <option value="pilates">Пилатес</option>
-                    <option value="dance">Танцы</option>
-                    <option value="other">Другое</option>
-                  </select>
-                </div>
-                <Button variant="hero" size="xl" className="w-full">
-                  Отправить заявку
-                </Button>
-              </form>
+          <div className="flex justify-center gap-4">
+            {socials.map((social, index) => (
+              <motion.a
+                key={social.label}
+                href={social.href}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
+                whileHover={{ scale: 1.1, y: -5 }}
+                className={`w-16 h-16 ${social.color} flex items-center justify-center`}
+              >
+                <social.icon className="w-8 h-8 text-white" />
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
 
-              <p className="text-xs text-muted-foreground mt-4 text-center">
-                Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
-              </p>
-            </div>
+        {/* Contact info */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5 }}
+          className="grid md:grid-cols-3 gap-8 text-center"
+        >
+          <div className="p-6">
+            <MapPin className="w-10 h-10 text-primary mx-auto mb-4" />
+            <h3 className="font-bold text-foreground mb-2">Адрес</h3>
+            <p className="text-muted-foreground">ЖК Новая Боровая</p>
+            <p className="text-muted-foreground">г. Минск</p>
+          </div>
 
-            {/* Location badge */}
-            <motion.div
-              className="mt-6 flex items-center justify-center gap-2 text-primary"
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <MapPin className="w-5 h-5" />
-              <span className="font-semibold">ЖК Новая Боровая, Минск</span>
-            </motion.div>
-          </motion.div>
-        </div>
+          <div className="p-6">
+            <Phone className="w-10 h-10 text-primary mx-auto mb-4" />
+            <h3 className="font-bold text-foreground mb-2">Телефон</h3>
+            <a href="tel:+375291234567" className="text-foreground font-bold hover:text-primary transition-colors">
+              +375 (29) 123-45-67
+            </a>
+          </div>
+
+          <div className="p-6">
+            <Clock className="w-10 h-10 text-primary mx-auto mb-4" />
+            <h3 className="font-bold text-foreground mb-2">Часы работы</h3>
+            <p className="text-muted-foreground">Пн-Вс: 08:00 - 22:00</p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
