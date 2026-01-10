@@ -61,13 +61,9 @@ export const Hero = () => {
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-black leading-tight mb-6"
             >
               <span className="text-foreground">Фитнес для </span>
-              <motion.span
-                className="text-primary inline-block"
-                animate={{ rotate: [0, -2, 2, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
+              <span className="text-primary">
                 всей семьи
-              </motion.span>
+              </span>
             </motion.h1>
 
             <motion.p
