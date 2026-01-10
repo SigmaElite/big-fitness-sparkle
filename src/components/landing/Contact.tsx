@@ -8,19 +8,19 @@ const contactInfo = [
     icon: MapPin,
     title: "Адрес",
     value: "ЖК Новая Боровая",
-    subvalue: "Минск, ул. Примерная, 1",
+    subvalue: "Минск, ул. Камова, 7а",
   },
   {
     icon: Phone,
     title: "Телефон",
-    value: "+375 29 123-45-67",
-    subvalue: "Звоните с 9:00 до 21:00",
+    value: "+375 (29) 278-88-06",
+    subvalue: "Звоните в рабочее время",
   },
   {
     icon: Clock,
     title: "Часы работы",
-    value: "Пн-Пт: 7:00 - 22:00",
-    subvalue: "Сб-Вс: 9:00 - 20:00",
+    value: "Ежедневно: 8:00 - 22:00",
+    subvalue: "Без выходных",
   },
 ];
 
