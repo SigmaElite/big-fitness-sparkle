@@ -59,12 +59,12 @@ export const Header = () => {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <motion.a
-              href="tel:+375291234567"
+              href="tel:+375292788806"
               className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors"
               whileHover={{ scale: 1.05 }}
             >
               <Phone className="w-4 h-4" />
-              <span className="font-semibold">+375 29 123-45-67</span>
+              <span className="font-semibold">+375 (29) 278-88-06</span>
             </motion.a>
             <Button variant="hero" size="lg">
               Записаться
