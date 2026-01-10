@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Clock, MapPin } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { useState } from "react";
 
 const navLinks = [
@@ -19,51 +19,55 @@ export const Header = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-card border-b border-border"
+      className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md shadow-soft"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 lg:h-24">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.a
             href="#"
-            className="flex items-center gap-3"
-            whileHover={{ scale: 1.02 }}
+            className="flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <div className="w-14 h-14 border-2 border-primary rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <span className="font-heading font-black text-lg text-foreground tracking-widest">BIG</span>
-                <div className="text-[8px] text-muted-foreground tracking-[0.2em]">FITNESS</div>
-              </div>
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange to-orange-light flex items-center justify-center shadow-lg">
+              <span className="text-primary-foreground font-heading font-black text-xl">BF</span>
+            </div>
+            <div className="hidden sm:block">
+              <span className="font-heading font-bold text-xl text-foreground">Big</span>
+              <span className="font-heading font-bold text-xl text-primary"> Fitness</span>
             </div>
           </motion.a>
 
-          {/* Center - Description */}
-          <div className="hidden lg:block text-center flex-1 px-8">
-            <p className="text-foreground font-medium">Фитнес-клуб</p>
-            <p className="text-muted-foreground text-sm">
-              с профессиональными инструкторами для любого возраста и уровня подготовки
-            </p>
-          </div>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link, index) => (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                className="font-medium text-foreground/80 hover:text-primary transition-colors relative group"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+              </motion.a>
+            ))}
+          </nav>
 
-          {/* Right side - Contact */}
-          <div className="hidden lg:flex items-center gap-6">
-            <div className="text-right">
-              <a href="tel:+375291234567" className="text-xl font-bold text-foreground hover:text-primary transition-colors">
-                +375 (29) 123-45-67
-              </a>
-              <div className="flex items-center justify-end gap-4 text-xs text-muted-foreground mt-1">
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" />
-                  08:00 - 22:00 (пн-вс)
-                </span>
-              </div>
-              <div className="flex items-center justify-end gap-1 text-xs text-primary mt-1">
-                <MapPin className="w-3 h-3" />
-                <span>ЖК Новая Боровая</span>
-              </div>
-            </div>
-            <Button variant="outline" size="sm" className="border-2 border-foreground hover:bg-foreground hover:text-card">
-              Заказать звонок
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-4">
+            <motion.a
+              href="tel:+375291234567"
+              className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Phone className="w-4 h-4" />
+              <span className="font-semibold">+375 29 123-45-67</span>
+            </motion.a>
+            <Button variant="hero" size="lg">
+              Записаться
             </Button>
           </div>
 
@@ -82,23 +86,20 @@ export const Header = () => {
           animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
           className="lg:hidden overflow-hidden"
         >
-          <div className="py-4 flex flex-col gap-4 border-t border-border">
+          <div className="py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-medium text-foreground hover:text-primary transition-colors py-2"
+                className="font-medium text-foreground/80 hover:text-primary transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-4 border-t border-border">
-              <a href="tel:+375291234567" className="text-lg font-bold text-foreground">
-                +375 (29) 123-45-67
-              </a>
-              <p className="text-xs text-muted-foreground mt-1">08:00 - 22:00 (пн-вс)</p>
-            </div>
+            <Button variant="hero" size="lg" className="mt-4">
+              Записаться
+            </Button>
           </div>
         </motion.nav>
       </div>
