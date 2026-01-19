@@ -1,18 +1,18 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Dumbbell, Heart, Zap, Music, Sparkles, Users, Flame, Moon } from "lucide-react";
+import { Dumbbell, Heart, Zap, Music, Sparkles, Users, Moon, Target } from "lucide-react";
 import adultsImage from "@/assets/adults-fitness.jpg";
 
 const programs = [
   { icon: Heart, title: "Йога", description: "Гармония тела и разума" },
   { icon: Zap, title: "Функциональный тренинг", description: "Сила и выносливость" },
   { icon: Music, title: "Танцы", description: "Зумба, хип-хоп, стрип-пластика" },
-  { icon: Dumbbell, title: "Пилатес", description: "Укрепление мышц кора" },
-  { icon: Flame, title: "Кардио", description: "Сжигание калорий" },
+  { icon: Dumbbell, title: "Силовые тренировки", description: "Набор мышечной массы" },
+  { icon: Target, title: "Кикбоксинг", description: "Боевые искусства и фитнес" },
   { icon: Moon, title: "Stretching", description: "Растяжка и гибкость" },
-  { icon: Sparkles, title: "Body Sculpt", description: "Скульптура тела" },
-  { icon: Users, title: "Групповые тренировки", description: "Заряд энергии вместе" },
+  { icon: Dumbbell, title: "Пилатес", description: "Укрепление мышц кора" },
+  { icon: Users, title: "Персональные коррекционные тренировки", description: "Индивидуальный подход" },
 ];
 
 export const AdultPrograms = () => {
@@ -131,7 +131,7 @@ export const AdultPrograms = () => {
               Все занятия проходят в малых группах или индивидуально, чтобы тренер мог уделить внимание каждому.
             </p>
             <ul className="space-y-3 mb-8">
-              {["Персональные программы", "Опытные тренеры", "Удобное расписание", "Комфортные залы"].map((item, i) => (
+              {["Персональные программы", "Опытные тренеры", "Удобное расписание", "Новые просторные залы с шикарным видом"].map((item, i) => (
                 <motion.li
                   key={item}
                   initial={{ opacity: 0, x: 20 }}
@@ -147,7 +147,7 @@ export const AdultPrograms = () => {
               ))}
             </ul>
             <Button variant="hero" size="xl">
-              Выбрать направление
+              Записаться на пробное бесплатное занятие
             </Button>
           </motion.div>
         </div>

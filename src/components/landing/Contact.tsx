@@ -7,13 +7,13 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Адрес",
-    value: "ЖК Новая Боровая",
-    subvalue: "Минск, ул. Камова, 7а",
+    value: "Новая Боровая, Камова, 7а",
+    subvalue: "Минск",
   },
   {
     icon: Phone,
     title: "Телефон",
-    value: "+375 (29) 278-88-06",
+    value: "+375 29 506 06 05",
     subvalue: "Звоните в рабочее время",
   },
   {
@@ -27,7 +27,7 @@ const contactInfo = [
 const socials = [
   { icon: Instagram, label: "Instagram", href: "#" },
   { icon: MessageCircle, label: "Viber", href: "#" },
-  { icon: Send, label: "Telegram", href: "#" },
+  { icon: Send, label: "Telegram", href: "https://t.me/bigfitness_bot" },
 ];
 
 export const Contact = () => {
@@ -139,7 +139,7 @@ export const Contact = () => {
           >
             <div className="bg-card rounded-3xl p-8 shadow-card border-2 border-mint">
               <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
-                Записаться на пробное занятие
+                Записаться на пробное бесплатное занятие
               </h3>
               <p className="text-muted-foreground mb-6">
                 Оставьте заявку, и мы свяжемся с вами для уточнения деталей
@@ -163,16 +163,19 @@ export const Contact = () => {
                 <div>
                   <select className="w-full px-4 py-3 rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors text-muted-foreground">
                     <option value="">Выберите направление</option>
-                    <option value="kids-ofp">Детский ОФП</option>
-                    <option value="kids-gym">Спортивная гимнастика</option>
+                    <option value="kids-ofp">ОФП и нейрофитнес для детей</option>
+                    <option value="kids-race">Гонки с препятствиями</option>
                     <option value="yoga">Йога</option>
                     <option value="pilates">Пилатес</option>
+                    <option value="kickboxing">Кикбоксинг</option>
                     <option value="dance">Танцы</option>
+                    <option value="strength">Силовые тренировки</option>
+                    <option value="personal">Персональные коррекционные тренировки</option>
                     <option value="other">Другое</option>
                   </select>
                 </div>
                 <Button variant="hero" size="xl" className="w-full">
-                  Отправить заявку
+                  Записаться на пробное бесплатное занятие
                 </Button>
               </form>
 
@@ -188,7 +191,7 @@ export const Contact = () => {
               transition={{ duration: 2, repeat: Infinity }}
             >
               <MapPin className="w-5 h-5" />
-              <span className="font-semibold">ЖК Новая Боровая, Минск</span>
+              <span className="font-semibold">Новая Боровая, Камова, 7а</span>
             </motion.div>
           </motion.div>
         </div>
