@@ -7,24 +7,17 @@ import kidsImage from "@/assets/kids-fitness.jpg";
 const programs = [
   {
     icon: Activity,
-    title: "Детский ОФП",
-    age: "от 4 лет",
-    description: "Общая физическая подготовка для развития силы, выносливости и координации",
+    title: "Общая физическая подготовка + нейрофитнес",
+    age: "4-14 лет",
+    description: "Тренировки для общего физического и ментального развития, ОФП для профессиональных спортсменов",
     color: "from-primary to-orange-light",
   },
   {
     icon: Medal,
-    title: "Спортивная гимнастика",
-    age: "от 4 лет",
-    description: "Профессиональные занятия гимнастикой с опытными тренерами",
+    title: "Гонки с препятствиями",
+    age: "от 6 лет",
+    description: "Соревновательная подготовка с элементами полосы препятствий",
     color: "from-mint-dark to-mint",
-  },
-  {
-    icon: Baby,
-    title: "Развивающие занятия",
-    age: "от 4 лет",
-    description: "Игровые занятия с элементами физкультуры и гимнастики",
-    color: "from-primary to-orange-light",
   },
 ];
 
@@ -61,7 +54,7 @@ export const KidsPrograms = () => {
             <span className="text-primary">направления</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Растим чемпионов с самого раннего возраста! Профессиональные тренеры и безопасные залы
+            Тренировки для общего физического и ментального развития, ОФП для профессиональных спортсменов
           </p>
         </motion.div>
 
@@ -113,7 +106,7 @@ export const KidsPrograms = () => {
               animate={{ rotate: [-3, 3, -3] }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <p className="text-4xl font-heading font-black text-primary-foreground">4+</p>
+              <p className="text-4xl font-heading font-black text-primary-foreground">4-14</p>
               <p className="text-sm text-primary-foreground/80">лет</p>
             </motion.div>
           </motion.div>
@@ -136,7 +129,7 @@ export const KidsPrograms = () => {
                     <program.icon className="w-7 h-7 text-primary-foreground" />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <h3 className="text-xl font-heading font-bold text-foreground">{program.title}</h3>
                       <span className="px-3 py-1 bg-mint rounded-full text-xs font-semibold text-foreground">{program.age}</span>
                     </div>
@@ -154,7 +147,7 @@ export const KidsPrograms = () => {
               className="pt-4"
             >
               <Button variant="hero" size="xl" className="w-full sm:w-auto">
-                Записать ребёнка
+                Записаться на пробное бесплатное занятие
               </Button>
             </motion.div>
           </div>
