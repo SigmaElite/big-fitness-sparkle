@@ -27,7 +27,7 @@ const contactInfo = [
 const socials = [
   { icon: Instagram, label: "Instagram", href: "#" },
   { icon: MessageCircle, label: "Viber", href: "#" },
-  { icon: Send, label: "Telegram", href: "https://t.me/bigfitness_bot" },
+  { icon: Send, label: "Telegram", href: "https://t.me/+375292788806" },
 ];
 
 export const Contact = () => {
