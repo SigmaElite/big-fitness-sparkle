@@ -67,37 +67,44 @@ const galleryMedia: MediaItem[] = [
 export const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [playingVideo, setPlayingVideo] = useState<number | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % galleryMedia.length);
-    setIsPlaying(false);
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(galleryMedia.length / itemsPerPage);
+  
+  const getCurrentItems = () => {
+    const start = currentPage * itemsPerPage;
+    return galleryMedia.slice(start, start + itemsPerPage);
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + galleryMedia.length) % galleryMedia.length);
-    setIsPlaying(false);
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+    setPlayingVideo(null);
   };
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-    setIsPlaying(false);
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+    setPlayingVideo(null);
   };
 
-  const toggleVideo = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
+  const toggleVideo = (globalIndex: number, localIndex: number) => {
+    const video = videoRefs.current[localIndex];
+    if (video) {
+      if (playingVideo === globalIndex) {
+        video.pause();
+        setPlayingVideo(null);
       } else {
-        videoRef.current.play();
+        // Pause any other playing video
+        videoRefs.current.forEach((v, i) => {
+          if (v && i !== localIndex) v.pause();
+        });
+        video.play();
+        setPlayingVideo(globalIndex);
       }
-      setIsPlaying(!isPlaying);
     }
   };
-
-  const currentMedia = galleryMedia[currentIndex];
 
   return (
     <section id="about" className="py-24 bg-card relative overflow-hidden" ref={ref}>
@@ -135,110 +142,99 @@ export const About = () => {
           </p>
         </motion.div>
 
-        {/* Gallery Carousel */}
+        {/* Gallery Grid with Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-10 md:mb-16"
+          className="mb-10 md:mb-16 relative"
         >
-          <div className="relative max-w-4xl mx-auto">
-            {/* Main Carousel */}
-            <div className="relative aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-muted">
-              {currentMedia.type === "image" ? (
-                <motion.img
-                  key={currentIndex}
-                  src={currentMedia.src}
-                  alt={currentMedia.alt}
-                  className="w-full h-full object-cover"
-                  initial={{ opacity: 0, scale: 1.1 }}
+          {/* Navigation Arrows */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={prevPage}
+            className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
+          >
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={nextPage}
+            className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
+          >
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+          </Button>
+
+          {/* Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 px-6 md:px-8">
+            {getCurrentItems().map((media, localIndex) => {
+              const globalIndex = currentPage * itemsPerPage + localIndex;
+              return (
+                <motion.div
+                  key={`${currentPage}-${localIndex}`}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
-              ) : (
-                <div className="relative w-full h-full">
-                  <video
-                    ref={videoRef}
-                    src={currentMedia.src}
-                    poster={currentMedia.poster}
-                    className="w-full h-full object-cover"
-                    loop
-                    playsInline
-                    onEnded={() => setIsPlaying(false)}
-                  />
-                  <button
-                    onClick={toggleVideo}
-                    className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                  >
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/90 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                      {isPlaying ? (
-                        <Pause className="w-8 h-8 md:w-10 md:h-10 text-primary-foreground" />
-                      ) : (
-                        <Play className="w-8 h-8 md:w-10 md:h-10 text-primary-foreground ml-1" />
-                      )}
-                    </div>
-                  </button>
-                </div>
-              )}
-
-              {/* Navigation arrows */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={prevSlide}
-                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background shadow-lg"
-              >
-                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={nextSlide}
-                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background shadow-lg"
-              >
-                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
-              </Button>
-
-              {/* Slide counter */}
-              <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-background/80 backdrop-blur-sm">
-                <span className="text-sm font-medium text-foreground">
-                  {currentIndex + 1} / {galleryMedia.length}
-                </span>
-              </div>
-
-              {/* Video indicator */}
-              {currentMedia.type === "video" && (
-                <div className="absolute top-3 md:top-4 right-3 md:right-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
-                  Видео
-                </div>
-              )}
-            </div>
-
-            {/* Thumbnails */}
-            <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-              {galleryMedia.map((media, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg md:rounded-xl overflow-hidden transition-all duration-300 ${
-                    index === currentIndex
-                      ? "ring-2 ring-primary ring-offset-2 scale-105"
-                      : "opacity-70 hover:opacity-100"
-                  }`}
+                  transition={{ duration: 0.4, delay: localIndex * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="rounded-xl md:rounded-2xl overflow-hidden shadow-card aspect-square relative group"
                 >
-                  <img
-                    src={media.type === "image" ? media.src : media.poster}
-                    alt={media.alt}
-                    className="w-full h-full object-cover"
-                  />
-                  {media.type === "video" && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                      <Play className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                    </div>
+                  {media.type === "image" ? (
+                    <img
+                      src={media.src}
+                      alt={media.alt}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <>
+                      <video
+                        ref={(el) => { videoRefs.current[localIndex] = el; }}
+                        src={media.src}
+                        poster={media.poster}
+                        className="w-full h-full object-cover"
+                        loop
+                        playsInline
+                        muted
+                      />
+                      <button
+                        onClick={() => toggleVideo(globalIndex, localIndex)}
+                        className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors"
+                      >
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                          {playingVideo === globalIndex ? (
+                            <Pause className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
+                          ) : (
+                            <Play className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground ml-0.5" />
+                          )}
+                        </div>
+                      </button>
+                      <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                        Видео
+                      </div>
+                    </>
                   )}
-                </button>
-              ))}
-            </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Page indicators */}
+          <div className="flex justify-center gap-2 mt-4">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentPage(index);
+                  setPlayingVideo(null);
+                }}
+                className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                  index === currentPage
+                    ? "bg-primary w-6 md:w-8"
+                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                }`}
+              />
+            ))}
           </div>
         </motion.div>
 
