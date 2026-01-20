@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Baby, Activity, Medal, Star, ChevronRight } from "lucide-react";
-import kidsImage from "@/assets/kids-neurofitness.jpg";
+import kidsImage from "@/assets/kids-neurofitness-new.jpg";
 
 const programs = [
   {

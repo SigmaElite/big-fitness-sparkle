@@ -1,10 +1,15 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Building2, Droplets, HandHeart, Users, Sparkles, Clock } from "lucide-react";
+import { useRef, useState } from "react";
+import { Building2, Droplets, HandHeart, Users, Sparkles, Clock, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import gymHall1 from "@/assets/gym-hall-1.jpg";
 import gymHall2 from "@/assets/gym-hall-2.jpg";
 import lobbyView from "@/assets/lobby-view.jpg";
 import lockers from "@/assets/lockers.jpg";
+import hallForestView from "@/assets/hall-forest-view.jpg";
+import hallCityView from "@/assets/hall-city-view.jpg";
+import corridor from "@/assets/corridor.jpg";
+import lobbyEntrance from "@/assets/lobby-entrance.jpg";
 
 const features = [
   {
@@ -39,16 +44,60 @@ const features = [
   },
 ];
 
-const galleryImages = [
-  { src: gymHall1, alt: "Зал для тренировок" },
-  { src: gymHall2, alt: "Просторный зал с видом" },
-  { src: lobbyView, alt: "Лобби с панорамными окнами" },
-  { src: lockers, alt: "Раздевалки" },
+type MediaItem = {
+  type: "image" | "video";
+  src: string;
+  alt: string;
+  poster?: string;
+};
+
+const galleryMedia: MediaItem[] = [
+  { type: "image", src: hallForestView, alt: "Зал с видом на лес" },
+  { type: "image", src: hallCityView, alt: "Зал с видом на город" },
+  { type: "video", src: "/videos/facility-tour-1.mov", alt: "Видео тур по залу", poster: gymHall1 },
+  { type: "image", src: gymHall1, alt: "Зал для тренировок" },
+  { type: "image", src: gymHall2, alt: "Просторный зал с видом" },
+  { type: "video", src: "/videos/facility-tour-2.mov", alt: "Видео тур по студии", poster: lobbyView },
+  { type: "image", src: lobbyView, alt: "Лобби с панорамными окнами" },
+  { type: "image", src: corridor, alt: "Коридор с дизайнерским освещением" },
+  { type: "image", src: lobbyEntrance, alt: "Вход в студию" },
+  { type: "image", src: lockers, alt: "Раздевалки" },
 ];
 
 export const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % galleryMedia.length);
+    setIsPlaying(false);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + galleryMedia.length) % galleryMedia.length);
+    setIsPlaying(false);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+    setIsPlaying(false);
+  };
+
+  const toggleVideo = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const currentMedia = galleryMedia[currentIndex];
 
   return (
     <section id="about" className="py-24 bg-card relative overflow-hidden" ref={ref}>
@@ -86,30 +135,110 @@ export const About = () => {
           </p>
         </motion.div>
 
-        {/* Gallery - Carousel */}
+        {/* Gallery Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-10 md:mb-16"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-            {galleryImages.map((image, index) => (
-              <motion.div
-                key={image.alt}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="rounded-xl md:rounded-2xl overflow-hidden shadow-card aspect-square"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Main Carousel */}
+            <div className="relative aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-muted">
+              {currentMedia.type === "image" ? (
+                <motion.img
+                  key={currentIndex}
+                  src={currentMedia.src}
+                  alt={currentMedia.alt}
                   className="w-full h-full object-cover"
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
                 />
-              </motion.div>
-            ))}
+              ) : (
+                <div className="relative w-full h-full">
+                  <video
+                    ref={videoRef}
+                    src={currentMedia.src}
+                    poster={currentMedia.poster}
+                    className="w-full h-full object-cover"
+                    loop
+                    playsInline
+                    onEnded={() => setIsPlaying(false)}
+                  />
+                  <button
+                    onClick={toggleVideo}
+                    className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+                  >
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/90 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                      {isPlaying ? (
+                        <Pause className="w-8 h-8 md:w-10 md:h-10 text-primary-foreground" />
+                      ) : (
+                        <Play className="w-8 h-8 md:w-10 md:h-10 text-primary-foreground ml-1" />
+                      )}
+                    </div>
+                  </button>
+                </div>
+              )}
+
+              {/* Navigation arrows */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={prevSlide}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background shadow-lg"
+              >
+                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={nextSlide}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background shadow-lg"
+              >
+                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+              </Button>
+
+              {/* Slide counter */}
+              <div className="absolute bottom-3 md:bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-background/80 backdrop-blur-sm">
+                <span className="text-sm font-medium text-foreground">
+                  {currentIndex + 1} / {galleryMedia.length}
+                </span>
+              </div>
+
+              {/* Video indicator */}
+              {currentMedia.type === "video" && (
+                <div className="absolute top-3 md:top-4 right-3 md:right-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                  Видео
+                </div>
+              )}
+            </div>
+
+            {/* Thumbnails */}
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              {galleryMedia.map((media, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg md:rounded-xl overflow-hidden transition-all duration-300 ${
+                    index === currentIndex
+                      ? "ring-2 ring-primary ring-offset-2 scale-105"
+                      : "opacity-70 hover:opacity-100"
+                  }`}
+                >
+                  <img
+                    src={media.type === "image" ? media.src : media.poster}
+                    alt={media.alt}
+                    className="w-full h-full object-cover"
+                  />
+                  {media.type === "video" && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <Play className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
         </motion.div>
 
