@@ -86,29 +86,31 @@ export const About = () => {
           </p>
         </motion.div>
 
-        {/* Gallery */}
+        {/* Gallery - Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
+          className="mb-10 md:mb-16"
         >
-          {galleryImages.map((image, index) => (
-            <motion.div
-              key={image.alt}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="rounded-2xl overflow-hidden shadow-card aspect-square"
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={image.alt}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="rounded-xl md:rounded-2xl overflow-hidden shadow-card aspect-square"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Features grid */}
