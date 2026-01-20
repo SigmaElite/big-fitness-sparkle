@@ -168,7 +168,7 @@ export const About = () => {
           </Button>
 
           {/* Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 px-8 md:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {getCurrentItems().map((media, localIndex) => {
               const globalIndex = currentPage * itemsPerPage + localIndex;
               return (
@@ -178,7 +178,8 @@ export const About = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: localIndex * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  className="rounded-xl md:rounded-2xl overflow-hidden shadow-card aspect-[3/4] h-[280px] md:h-[380px] lg:h-[420px] relative group cursor-pointer"
+                  className="rounded-2xl md:rounded-3xl overflow-hidden shadow-card relative group cursor-pointer"
+                  style={{ aspectRatio: '3/4' }}
                 >
                   {media.type === "image" ? (
                     <img
