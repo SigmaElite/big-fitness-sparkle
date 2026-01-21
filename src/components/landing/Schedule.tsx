@@ -38,29 +38,24 @@ export const Schedule = () => {
   const [activeTab, setActiveTab] = useState("forest");
 
   return (
-    <section id="schedule" className="py-8 md:py-12 bg-card" ref={ref}>
+    <section id="schedule" className="py-6 md:py-8 bg-card" ref={ref}>
       <div className="container mx-auto px-4">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-4 md:mb-6"
-        >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-black mb-1">
+        <div className="text-center mb-3">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-black">
             <span className="text-foreground">Расписание </span>
             <span className="text-primary">занятий</span>
           </h2>
-        </motion.div>
+        </div>
 
         {/* Tabs for halls */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 gap-1.5 bg-transparent h-auto mb-3 md:mb-4">
+          <TabsList className="grid w-full grid-cols-4 gap-1 bg-transparent h-auto mb-2">
             {scheduleHalls.map((hall) => (
               <TabsTrigger
                 key={hall.id}
                 value={hall.id}
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-lg py-2 px-2 text-xs md:text-sm font-semibold transition-all hover:bg-mint-dark"
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-md py-1.5 px-1 text-[10px] md:text-xs font-semibold transition-all hover:bg-mint-dark"
               >
                 {hall.name}
               </TabsTrigger>
@@ -69,15 +64,13 @@ export const Schedule = () => {
 
           {scheduleHalls.map((hall) => (
             <TabsContent key={hall.id} value={hall.id} className="mt-0">
-              <div className="bg-mint-light rounded-lg p-1.5 md:p-2 border border-mint overflow-hidden">
-                <div className="overflow-hidden rounded-md">
-                  <img
-                    src={hall.image}
-                    alt={`Расписание - ${hall.name}`}
-                    className="w-full h-auto object-cover object-center"
-                    style={{ marginTop: '-8%', marginBottom: '-5%' }}
-                  />
-                </div>
+              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden max-h-[60vh] md:max-h-[70vh] overflow-y-auto">
+                <img
+                  src={hall.image}
+                  alt={`Расписание - ${hall.name}`}
+                  className="w-full h-auto object-cover object-center rounded-sm"
+                  style={{ marginTop: '-10%', marginBottom: '-8%' }}
+                />
               </div>
             </TabsContent>
           ))}
