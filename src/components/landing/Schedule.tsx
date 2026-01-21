@@ -38,56 +38,50 @@ export const Schedule = () => {
   const [activeTab, setActiveTab] = useState("forest");
 
   return (
-    <section id="schedule" className="py-12 md:py-16 bg-card relative overflow-hidden" ref={ref}>
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="schedule" className="py-8 md:py-12 bg-card" ref={ref}>
+      <div className="container mx-auto px-4">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-6 md:mb-8"
+          transition={{ duration: 0.4 }}
+          className="text-center mb-4 md:mb-6"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-black mb-2">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-black mb-1">
             <span className="text-foreground">Расписание </span>
             <span className="text-primary">занятий</span>
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground">
-            Выберите зал для просмотра расписания
-          </p>
         </motion.div>
 
         {/* Tabs for halls */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 gap-2 bg-transparent h-auto mb-4 md:mb-6">
-              {scheduleHalls.map((hall) => (
-                <TabsTrigger
-                  key={hall.id}
-                  value={hall.id}
-                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-xl py-2.5 px-3 text-sm font-semibold transition-all duration-300 hover:bg-mint-dark"
-                >
-                  {hall.name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 gap-1.5 bg-transparent h-auto mb-3 md:mb-4">
             {scheduleHalls.map((hall) => (
-              <TabsContent key={hall.id} value={hall.id} className="mt-0">
-                <div className="bg-mint-light rounded-xl md:rounded-2xl p-2 md:p-4 border border-mint">
+              <TabsTrigger
+                key={hall.id}
+                value={hall.id}
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-lg py-2 px-2 text-xs md:text-sm font-semibold transition-all hover:bg-mint-dark"
+              >
+                {hall.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {scheduleHalls.map((hall) => (
+            <TabsContent key={hall.id} value={hall.id} className="mt-0">
+              <div className="bg-mint-light rounded-lg p-1.5 md:p-2 border border-mint overflow-hidden">
+                <div className="overflow-hidden rounded-md">
                   <img
                     src={hall.image}
                     alt={`Расписание - ${hall.name}`}
-                    className="w-full h-auto rounded-lg md:rounded-xl"
+                    className="w-full h-auto object-cover object-center"
+                    style={{ marginTop: '-8%', marginBottom: '-5%' }}
                   />
                 </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </motion.div>
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
       </div>
     </section>
   );
