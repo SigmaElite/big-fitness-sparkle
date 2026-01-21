@@ -38,10 +38,10 @@ export const Schedule = () => {
   const [activeTab, setActiveTab] = useState("forest");
 
   return (
-    <section id="schedule" className="py-6 md:py-8 bg-card" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section id="schedule" className="min-h-screen flex flex-col py-4 bg-card" ref={ref}>
+      <div className="container mx-auto px-4 flex flex-col flex-1">
         {/* Section header */}
-        <div className="text-center mb-3">
+        <div className="text-center mb-2">
           <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-black">
             <span className="text-foreground">Расписание </span>
             <span className="text-primary">занятий</span>
@@ -49,8 +49,8 @@ export const Schedule = () => {
         </div>
 
         {/* Tabs for halls */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 gap-1 bg-transparent h-auto mb-2">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1">
+          <TabsList className="grid w-full grid-cols-4 gap-1 bg-transparent h-auto mb-2 flex-shrink-0">
             {scheduleHalls.map((hall) => (
               <TabsTrigger
                 key={hall.id}
@@ -63,13 +63,12 @@ export const Schedule = () => {
           </TabsList>
 
           {scheduleHalls.map((hall) => (
-            <TabsContent key={hall.id} value={hall.id} className="mt-0">
-              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden max-h-[60vh] md:max-h-[70vh] overflow-y-auto">
+            <TabsContent key={hall.id} value={hall.id} className="mt-0 flex-1 flex">
+              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden flex-1 flex items-center justify-center">
                 <img
                   src={hall.image}
                   alt={`Расписание - ${hall.name}`}
-                  className="w-full h-auto object-cover object-center rounded-sm"
-                  style={{ marginTop: '-10%', marginBottom: '-8%' }}
+                  className="w-full h-full object-contain rounded-sm"
                 />
               </div>
             </TabsContent>
