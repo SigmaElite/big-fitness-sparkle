@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Building2, Droplets, HandHeart, Users, Sparkles, Clock, ChevronLeft, ChevronRight, Play, Pause, Calendar } from "lucide-react";
+import { Building2, Droplets, HandHeart, Users, Sparkles, Clock, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import gymHall1 from "@/assets/gym-hall-1.jpg";
 import gymHall2 from "@/assets/gym-hall-2.jpg";
@@ -19,7 +19,7 @@ const features = [
   },
   {
     icon: Droplets,
-    title: "Большие раздевалки и душевые",
+    title: "3 раздевалки с душевыми",
     description: "Комфортные душевые кабины с горячей водой",
   },
   {
@@ -64,8 +64,6 @@ const galleryMedia: MediaItem[] = [
   { type: "image", src: lockers, alt: "Раздевалки" },
 ];
 
-// Placeholder schedule image - replace with actual schedule
-const SCHEDULE_IMAGE_URL = "";
 
 export const About = () => {
   const ref = useRef(null);
@@ -325,64 +323,6 @@ export const About = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Schedule Section */}
-        <motion.div
-          id="schedule"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-20"
-        >
-          <div className="text-center mb-8">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={isInView ? { scale: 1 } : {}}
-              transition={{ delay: 0.7, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center gap-2 bg-mint rounded-full px-4 py-2 mb-6"
-            >
-              <Calendar className="w-5 h-5 text-primary" />
-              <span className="font-semibold text-foreground">Расписание</span>
-            </motion.div>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black mb-4">
-              <span className="text-foreground">Расписание </span>
-              <span className="text-primary">занятий</span>
-            </h3>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Актуальное расписание всех направлений
-            </p>
-          </div>
-
-          <div className="relative bg-gradient-to-br from-mint-light to-card rounded-3xl p-4 md:p-8 border-2 border-mint overflow-hidden">
-            {SCHEDULE_IMAGE_URL ? (
-              <img 
-                src={SCHEDULE_IMAGE_URL} 
-                alt="Расписание занятий" 
-                className="w-full h-auto rounded-2xl shadow-lg"
-              />
-            ) : (
-              <div className="flex flex-col items-center justify-center py-16 text-center">
-                <Calendar className="w-16 h-16 text-muted-foreground/50 mb-4" />
-                <p className="text-muted-foreground text-lg mb-2">Расписание скоро появится</p>
-                <p className="text-muted-foreground/70 text-sm max-w-md">
-                  Чтобы добавить расписание, замените значение переменной <code className="bg-muted px-2 py-0.5 rounded text-xs">SCHEDULE_IMAGE_URL</code> в файле About.tsx на ссылку на изображение
-                </p>
-              </div>
-            )}
-            
-            {/* Decorative elements */}
-            <motion.div
-              className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute -bottom-8 -left-8 w-24 h-24 bg-mint rounded-full opacity-50"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-            />
-          </div>
-        </motion.div>
 
         {/* Stats bar */}
         <motion.div

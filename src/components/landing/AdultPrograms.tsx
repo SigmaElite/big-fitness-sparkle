@@ -10,7 +10,7 @@ const programs = [
   { icon: Music, title: "Танцы", description: "Зумба, хип-хоп, стрип-пластика" },
   { icon: Dumbbell, title: "Силовые тренировки", description: "Набор мышечной массы" },
   { icon: Target, title: "Кикбоксинг", description: "Боевые искусства и фитнес" },
-  { icon: Moon, title: "Stretching", description: "Растяжка и гибкость" },
+  { icon: Moon, title: "Стретчинг", description: "Растяжка и гибкость" },
   { icon: Dumbbell, title: "Пилатес", description: "Укрепление мышц кора" },
   { icon: Users, title: "Персональные тренировки", description: "Индивидуальный подход" },
 ];
@@ -56,7 +56,7 @@ export const AdultPrograms = () => {
             <span className="text-primary">направления</span>
           </h2>
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            Только групповые и индивидуальные занятия — никаких тренажёров!
+            Групповые и персональные тренировки. Тренажерного зала у нас нет.
           </p>
         </motion.div>
 
