@@ -134,7 +134,7 @@ export const Hero = () => {
               {[
                 { icon: Square, value: "630", label: "кв.м" },
                 { icon: Sparkles, value: "4", label: "зала" },
-                { icon: ShowerHead, value: "✓", label: "раздевалки" },
+                { icon: ShowerHead, value: "3", label: "раздевалки с душевыми" },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -162,14 +162,14 @@ export const Hero = () => {
             className="relative hidden md:block"
           >
             <motion.div
-              className="relative z-10 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
+              className="relative z-10 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl max-w-md mx-auto"
               whileHover={{ scale: 1.02, rotate: 1 }}
               transition={{ duration: 0.3 }}
             >
               <img
                 src={buildingImage}
                 alt="Big Fitness - фитнес зал в Новой Боровой"
-                className="w-full h-auto object-cover aspect-[4/3]"
+                className="w-full h-auto object-cover aspect-[3/4]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
             </motion.div>

@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Baby, Activity, Medal, Star, ChevronRight } from "lucide-react";
+import { Baby, Activity, Medal, Star, ChevronRight, Heart } from "lucide-react";
 import kidsImage from "@/assets/kids-neurofitness-new.jpg";
 
 const programs = [
@@ -18,6 +18,13 @@ const programs = [
     age: "от 6 лет",
     description: "Соревновательная подготовка с элементами полосы препятствий",
     color: "from-mint-dark to-mint",
+  },
+  {
+    icon: Heart,
+    title: "Оздоровительная гимнастика",
+    age: "4-14 лет",
+    description: "Укрепление здоровья и правильная осанка",
+    color: "from-pink-400 to-pink-300",
   },
 ];
 
