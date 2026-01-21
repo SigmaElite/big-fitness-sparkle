@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Dumbbell, Heart, Zap, Music, Sparkles, Users, Moon, Target } from "lucide-react";
-import adultsImage from "@/assets/gym-hall-2.jpg";
+import adultsImage from "@/assets/adults-training.jpg";
 
 const programs = [
   { icon: Heart, title: "Йога", description: "Гармония тела и разума" },
