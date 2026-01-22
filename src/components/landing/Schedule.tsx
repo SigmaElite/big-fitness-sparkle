@@ -68,7 +68,7 @@ export const Schedule = () => {
                 <img
                   src={hall.image}
                   alt={`Расписание - ${hall.name}`}
-                  className="w-full h-full object-contain rounded-sm"
+                  className="w-full h-full max-h-screen object-contain rounded-sm"
                 />
               </div>
             </TabsContent>
