@@ -38,24 +38,24 @@ export const Schedule = () => {
   const [activeTab, setActiveTab] = useState("forest");
 
   return (
-    <section id="schedule" className="min-h-screen flex flex-col py-4 bg-card" ref={ref}>
-      <div className="container mx-auto px-4 flex flex-col flex-1">
+    <section id="schedule" className="h-screen flex flex-col py-2 bg-card" ref={ref}>
+      <div className="w-full px-2 sm:px-4 flex flex-col flex-1 max-h-full">
         {/* Section header */}
-        <div className="text-center mb-2">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-black">
+        <div className="text-center mb-1">
+          <h2 className="text-base sm:text-lg md:text-xl font-heading font-black">
             <span className="text-foreground">Расписание </span>
             <span className="text-primary">занятий</span>
           </h2>
         </div>
 
         {/* Tabs for halls */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1">
-          <TabsList className="grid w-full grid-cols-4 gap-1 bg-transparent h-auto mb-2 flex-shrink-0">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1 min-h-0">
+          <TabsList className="grid w-full grid-cols-4 gap-1 bg-transparent h-auto mb-1 flex-shrink-0">
             {scheduleHalls.map((hall) => (
               <TabsTrigger
                 key={hall.id}
                 value={hall.id}
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-md py-1.5 px-1 text-[10px] md:text-xs font-semibold transition-all hover:bg-mint-dark"
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-md py-1 px-1 text-[9px] sm:text-[10px] md:text-xs font-semibold transition-all hover:bg-mint-dark"
               >
                 {hall.name}
               </TabsTrigger>
@@ -63,12 +63,12 @@ export const Schedule = () => {
           </TabsList>
 
           {scheduleHalls.map((hall) => (
-            <TabsContent key={hall.id} value={hall.id} className="mt-0 flex-1 flex">
-              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden flex-1 flex items-center justify-center">
+            <TabsContent key={hall.id} value={hall.id} className="mt-0 flex-1 min-h-0">
+              <div className="bg-mint-light rounded-md p-1 border border-mint h-full flex items-center justify-center overflow-hidden">
                 <img
                   src={hall.image}
                   alt={`Расписание - ${hall.name}`}
-                  className="w-full h-full max-h-screen object-contain rounded-sm"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </TabsContent>
