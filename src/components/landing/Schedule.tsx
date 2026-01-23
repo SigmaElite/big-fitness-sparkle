@@ -64,12 +64,11 @@ export const Schedule = () => {
 
           {scheduleHalls.map((hall) => (
             <TabsContent key={hall.id} value={hall.id} className="mt-0">
-              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden max-h-[60vh] md:max-h-[70vh] overflow-y-auto">
+              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden max-h-[55vh] md:max-h-[65vh] overflow-y-auto">
                 <img
                   src={hall.image}
                   alt={`Расписание - ${hall.name}`}
                   className="w-full h-auto object-cover object-center rounded-sm"
-                  style={{ marginTop: '-10%', marginBottom: '-8%' }}
                 />
               </div>
             </TabsContent>
