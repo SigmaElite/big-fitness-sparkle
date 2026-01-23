@@ -64,7 +64,7 @@ export const Schedule = () => {
 
           {scheduleHalls.map((hall) => (
             <TabsContent key={hall.id} value={hall.id} className="mt-0">
-              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden max-h-[55vh] md:max-h-[65vh] overflow-y-auto">
+              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden max-h-[66vh] md:max-h-[78vh] overflow-y-auto">
                 <img
                   src={hall.image}
                   alt={`Расписание - ${hall.name}`}
