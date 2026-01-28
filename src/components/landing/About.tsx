@@ -2,6 +2,8 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Building2, Droplets, HandHeart, Users, Sparkles, Clock, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 import gymHall1 from "@/assets/gym-hall-1.jpg";
 import gymHall2 from "@/assets/gym-hall-2.jpg";
 import lobbyView from "@/assets/lobby-view.jpg";
@@ -45,25 +47,26 @@ const features = [
 ];
 
 type MediaItem = {
+  id: string;
   type: "image" | "video";
-  src: string;
-  alt: string;
-  poster?: string;
+  url: string;
+  thumbnail_url: string | null;
+  title: string | null;
+  sort_order: number;
 };
 
-const galleryMedia: MediaItem[] = [
-  { type: "image", src: hallForestView, alt: "Зал с видом на лес" },
-  { type: "image", src: hallCityView, alt: "Зал с видом на город" },
-  { type: "video", src: "/videos/facility-tour-1.mov", alt: "Видео тур по залу", poster: gymHall1 },
-  { type: "image", src: gymHall1, alt: "Зал для тренировок" },
-  { type: "image", src: gymHall2, alt: "Просторный зал с видом" },
-  { type: "video", src: "/videos/facility-tour-2.mov", alt: "Видео тур по студии", poster: lobbyView },
-  { type: "image", src: lobbyView, alt: "Лобби с панорамными окнами" },
-  { type: "image", src: corridor, alt: "Коридор с дизайнерским освещением" },
-  { type: "image", src: lobbyEntrance, alt: "Вход в студию" },
-  { type: "image", src: lockers, alt: "Раздевалки" },
+const fallbackGallery: MediaItem[] = [
+  { id: "1", type: "image", url: hallForestView, thumbnail_url: null, title: "Зал с видом на лес", sort_order: 1 },
+  { id: "2", type: "image", url: hallCityView, thumbnail_url: null, title: "Зал с видом на город", sort_order: 2 },
+  { id: "3", type: "video", url: "/videos/facility-tour-1.mov", thumbnail_url: gymHall1, title: "Видео тур по залу", sort_order: 3 },
+  { id: "4", type: "image", url: gymHall1, thumbnail_url: null, title: "Зал для тренировок", sort_order: 4 },
+  { id: "5", type: "image", url: gymHall2, thumbnail_url: null, title: "Просторный зал с видом", sort_order: 5 },
+  { id: "6", type: "video", url: "/videos/facility-tour-2.mov", thumbnail_url: lobbyView, title: "Видео тур по студии", sort_order: 6 },
+  { id: "7", type: "image", url: lobbyView, thumbnail_url: null, title: "Лобби с панорамными окнами", sort_order: 7 },
+  { id: "8", type: "image", url: corridor, thumbnail_url: null, title: "Коридор с дизайнерским освещением", sort_order: 8 },
+  { id: "9", type: "image", url: lobbyEntrance, thumbnail_url: null, title: "Вход в студию", sort_order: 9 },
+  { id: "10", type: "image", url: lockers, thumbnail_url: null, title: "Раздевалки", sort_order: 10 },
 ];
-
 
 export const About = () => {
   const ref = useRef(null);
@@ -73,6 +76,24 @@ export const About = () => {
   const [showVideoControls, setShowVideoControls] = useState<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const hideControlsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [galleryMedia, setGalleryMedia] = useState<MediaItem[]>(fallbackGallery);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      const { data, error } = await supabase
+        .from("gallery")
+        .select("*")
+        .order("sort_order");
+
+      if (!error && data && data.length > 0) {
+        setGalleryMedia(data as MediaItem[]);
+      }
+      setIsLoading(false);
+    };
+
+    fetchGallery();
+  }, []);
 
   const itemsPerPage = 4;
   const totalPages = Math.ceil(galleryMedia.length / itemsPerPage);
@@ -206,66 +227,74 @@ export const About = () => {
 
           {/* Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {getCurrentItems().map((media, localIndex) => {
-              const globalIndex = currentPage * itemsPerPage + localIndex;
-              return (
-                <motion.div
-                  key={`${currentPage}-${localIndex}`}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: localIndex * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="rounded-2xl md:rounded-3xl overflow-hidden shadow-card relative group cursor-pointer"
-                  style={{ aspectRatio: '3/4' }}
-                >
-                  {media.type === "image" ? (
-                    <img
-                      src={media.src}
-                      alt={media.alt}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <>
-                      <video
-                        ref={(el) => { videoRefs.current[localIndex] = el; }}
-                        src={media.src}
-                        poster={media.poster}
+            {isLoading ? (
+              <>
+                {[1, 2, 3, 4].map((i) => (
+                  <Skeleton key={i} className="rounded-3xl" style={{ aspectRatio: '3/4' }} />
+                ))}
+              </>
+            ) : (
+              getCurrentItems().map((media, localIndex) => {
+                const globalIndex = currentPage * itemsPerPage + localIndex;
+                return (
+                  <motion.div
+                    key={`${currentPage}-${localIndex}`}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: localIndex * 0.1 }}
+                    whileHover={{ scale: 1.02 }}
+                    className="rounded-2xl md:rounded-3xl overflow-hidden shadow-card relative group cursor-pointer"
+                    style={{ aspectRatio: '3/4' }}
+                  >
+                    {media.type === "image" ? (
+                      <img
+                        src={media.url}
+                        alt={media.title || "Gallery item"}
                         className="w-full h-full object-cover"
-                        loop
-                        playsInline
-                        muted
                       />
-                      <button
-                        onClick={() => handleVideoClick(globalIndex, localIndex)}
-                        className="absolute inset-0 flex items-center justify-center transition-colors"
-                        style={{ background: playingVideo === globalIndex ? 'transparent' : 'rgba(0,0,0,0.2)' }}
-                      >
-                        <AnimatePresence>
-                          {(playingVideo !== globalIndex || showVideoControls === globalIndex) && (
-                            <motion.div 
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0.8 }}
-                              transition={{ duration: 0.2 }}
-                              className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/90 flex items-center justify-center shadow-lg"
-                            >
-                              {playingVideo === globalIndex ? (
-                                <Pause className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
-                              ) : (
-                                <Play className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground ml-0.5" />
-                              )}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </button>
-                      <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
-                        Видео
-                      </div>
-                    </>
-                  )}
-                </motion.div>
-              );
-            })}
+                    ) : (
+                      <>
+                        <video
+                          ref={(el) => { videoRefs.current[localIndex] = el; }}
+                          src={media.url}
+                          poster={media.thumbnail_url || undefined}
+                          className="w-full h-full object-cover"
+                          loop
+                          playsInline
+                          muted
+                        />
+                        <button
+                          onClick={() => handleVideoClick(globalIndex, localIndex)}
+                          className="absolute inset-0 flex items-center justify-center transition-colors"
+                          style={{ background: playingVideo === globalIndex ? 'transparent' : 'rgba(0,0,0,0.2)' }}
+                        >
+                          <AnimatePresence>
+                            {(playingVideo !== globalIndex || showVideoControls === globalIndex) && (
+                              <motion.div 
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                transition={{ duration: 0.2 }}
+                                className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/90 flex items-center justify-center shadow-lg"
+                              >
+                                {playingVideo === globalIndex ? (
+                                  <Pause className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
+                                ) : (
+                                  <Play className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground ml-0.5" />
+                                )}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </button>
+                        <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                          Видео
+                        </div>
+                      </>
+                    )}
+                  </motion.div>
+                );
+              })
+            )}
           </div>
 
           {/* Page indicators */}

@@ -1,23 +1,56 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Dumbbell, Heart, Zap, Music, Sparkles, Users, Moon, Target } from "lucide-react";
+import { Dumbbell, Heart, Zap, Music, Sparkles, Users, Moon, Target, Activity, Medal, Star, Baby } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 import adultsImage from "@/assets/adults-training.jpg";
 
-const programs = [
-  { icon: Heart, title: "Йога", description: "Гармония тела и разума" },
-  { icon: Zap, title: "Функциональный тренинг", description: "Сила и выносливость" },
-  { icon: Music, title: "Танцы", description: "Зумба, хип-хоп, стрип-пластика" },
-  { icon: Dumbbell, title: "Силовые тренировки", description: "Набор мышечной массы" },
-  { icon: Target, title: "Кикбоксинг", description: "Боевые искусства и фитнес" },
-  { icon: Moon, title: "Стретчинг", description: "Растяжка и гибкость" },
-  { icon: Dumbbell, title: "Пилатес", description: "Укрепление мышц кора" },
-  { icon: Users, title: "Персональные тренировки", description: "Индивидуальный подход" },
+interface Program {
+  id: string;
+  title: string;
+  description: string;
+  icon: string | null;
+  sort_order: number;
+}
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Activity, Medal, Heart, Zap, Moon, Target, Music, Dumbbell, Users, Star, Baby, Sparkles
+};
+
+const fallbackPrograms = [
+  { id: "1", title: "Йога", description: "Гармония тела и разума", icon: "Heart", sort_order: 1 },
+  { id: "2", title: "Функциональный тренинг", description: "Сила и выносливость", icon: "Zap", sort_order: 2 },
+  { id: "3", title: "Танцы", description: "Зумба, хип-хоп, стрип-пластика", icon: "Music", sort_order: 3 },
+  { id: "4", title: "Силовые тренировки", description: "Набор мышечной массы", icon: "Dumbbell", sort_order: 4 },
+  { id: "5", title: "Кикбоксинг", description: "Боевые искусства и фитнес", icon: "Target", sort_order: 5 },
+  { id: "6", title: "Стретчинг", description: "Растяжка и гибкость", icon: "Moon", sort_order: 6 },
+  { id: "7", title: "Пилатес", description: "Укрепление мышц кора", icon: "Dumbbell", sort_order: 7 },
+  { id: "8", title: "Персональные тренировки", description: "Индивидуальный подход", icon: "Users", sort_order: 8 },
 ];
 
 export const AdultPrograms = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [programs, setPrograms] = useState<Program[]>(fallbackPrograms);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      const { data, error } = await supabase
+        .from("programs")
+        .select("*")
+        .eq("category", "adults")
+        .order("sort_order");
+
+      if (!error && data && data.length > 0) {
+        setPrograms(data);
+      }
+      setIsLoading(false);
+    };
+
+    fetchPrograms();
+  }, []);
 
   return (
     <section id="adults" className="py-16 md:py-24 bg-mint-light relative overflow-hidden" ref={ref}>
@@ -62,28 +95,40 @@ export const AdultPrograms = () => {
 
         {/* Programs grid - responsive */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 mb-10 md:mb-16">
-          {programs.map((program, index) => (
-            <motion.div
-              key={program.title}
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
-              whileHover={{ y: -10, scale: 1.05 }}
-              className="group"
-            >
-              <div className="bg-card rounded-xl md:rounded-2xl p-4 md:p-6 h-full shadow-soft hover:shadow-card transition-all duration-300 border-2 border-transparent hover:border-primary">
+          {isLoading ? (
+            <>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <Skeleton key={i} className="h-32 md:h-40 rounded-2xl" />
+              ))}
+            </>
+          ) : (
+            programs.map((program, index) => {
+              const IconComponent = iconMap[program.icon || "Heart"] || Heart;
+              
+              return (
                 <motion.div
-                  className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br from-mint to-mint-dark flex items-center justify-center mb-2 md:mb-4 group-hover:bg-gradient-to-br group-hover:from-orange group-hover:to-orange-light transition-all duration-300"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
+                  key={program.id}
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
+                  whileHover={{ y: -10, scale: 1.05 }}
+                  className="group"
                 >
-                  <program.icon className="w-5 h-5 md:w-7 md:h-7 text-foreground group-hover:text-primary-foreground transition-colors" />
+                  <div className="bg-card rounded-xl md:rounded-2xl p-4 md:p-6 h-full shadow-soft hover:shadow-card transition-all duration-300 border-2 border-transparent hover:border-primary">
+                    <motion.div
+                      className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br from-mint to-mint-dark flex items-center justify-center mb-2 md:mb-4 group-hover:bg-gradient-to-br group-hover:from-orange group-hover:to-orange-light transition-all duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <IconComponent className="w-5 h-5 md:w-7 md:h-7 text-foreground group-hover:text-primary-foreground transition-colors" />
+                    </motion.div>
+                    <h3 className="font-heading font-bold text-sm md:text-lg text-foreground mb-1 md:mb-2">{program.title}</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">{program.description}</p>
+                  </div>
                 </motion.div>
-                <h3 className="font-heading font-bold text-sm md:text-lg text-foreground mb-1 md:mb-2">{program.title}</h3>
-                <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">{program.description}</p>
-              </div>
-            </motion.div>
-          ))}
+              );
+            })
+          )}
         </div>
 
         {/* Image and CTA */}
