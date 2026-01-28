@@ -1,36 +1,52 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Baby, Activity, Medal, Star, ChevronRight, Heart } from "lucide-react";
+import { Baby, Activity, Medal, Star, ChevronRight, Heart, Zap, Moon, Target, Music, Dumbbell, Users } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 import kidsImage from "@/assets/kids-neurofitness-new.jpg";
 
-const programs = [
-  {
-    icon: Activity,
-    title: "ОФП + нейрофитнес",
-    age: "4-14 лет",
-    description: "Тренировки для общего физического и ментального развития",
-    color: "from-primary to-orange-light",
-  },
-  {
-    icon: Medal,
-    title: "Гонки с препятствиями",
-    age: "от 6 лет",
-    description: "Соревновательная подготовка с элементами полосы препятствий",
-    color: "from-mint-dark to-mint",
-  },
-  {
-    icon: Heart,
-    title: "Оздоровительная гимнастика",
-    age: "4-14 лет",
-    description: "Укрепление здоровья и правильная осанка",
-    color: "from-pink-400 to-pink-300",
-  },
+interface Program {
+  id: string;
+  title: string;
+  description: string;
+  icon: string | null;
+  color: string | null;
+  sort_order: number;
+}
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Activity, Medal, Heart, Zap, Moon, Target, Music, Dumbbell, Users, Star, Baby
+};
+
+const fallbackPrograms = [
+  { id: "1", title: "ОФП + нейрофитнес", description: "Тренировки для общего физического и ментального развития", icon: "Activity", color: "from-primary to-orange-light", sort_order: 1 },
+  { id: "2", title: "Гонки с препятствиями", description: "Соревновательная подготовка с элементами полосы препятствий", icon: "Medal", color: "from-mint-dark to-mint", sort_order: 2 },
+  { id: "3", title: "Оздоровительная гимнастика", description: "Укрепление здоровья и правильная осанка", icon: "Heart", color: "from-pink-400 to-pink-300", sort_order: 3 },
 ];
 
 export const KidsPrograms = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [programs, setPrograms] = useState<Program[]>(fallbackPrograms);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      const { data, error } = await supabase
+        .from("programs")
+        .select("*")
+        .eq("category", "kids")
+        .order("sort_order");
+
+      if (!error && data && data.length > 0) {
+        setPrograms(data);
+      }
+      setIsLoading(false);
+    };
+
+    fetchPrograms();
+  }, []);
 
   return (
     <section id="kids" className="py-16 md:py-24 bg-card relative overflow-hidden" ref={ref}>
@@ -122,32 +138,44 @@ export const KidsPrograms = () => {
 
           {/* Programs list */}
           <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
-            {programs.map((program, index) => (
-              <motion.div
-                key={program.title}
-                initial={{ opacity: 0, x: 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
-                className="group"
-              >
-                <motion.div
-                  className="bg-card border-2 border-mint rounded-xl md:rounded-2xl p-4 md:p-6 flex gap-3 md:gap-4 items-start hover:border-primary hover:shadow-card transition-all duration-300"
-                  whileHover={{ x: 10, scale: 1.02 }}
-                >
-                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br ${program.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
-                    <program.icon className="w-6 h-6 md:w-7 md:h-7 text-primary-foreground" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 md:gap-3 mb-1 md:mb-2 flex-wrap">
-                      <h3 className="text-lg md:text-xl font-heading font-bold text-foreground">{program.title}</h3>
-                      <span className="px-2 md:px-3 py-0.5 md:py-1 bg-mint rounded-full text-xs font-semibold text-foreground">{program.age}</span>
-                    </div>
-                    <p className="text-sm md:text-base text-muted-foreground">{program.description}</p>
-                  </div>
-                  <ChevronRight className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:translate-x-1 transition-transform flex-shrink-0 mt-1" />
-                </motion.div>
-              </motion.div>
-            ))}
+            {isLoading ? (
+              <>
+                {[1, 2, 3].map((i) => (
+                  <Skeleton key={i} className="h-24 w-full rounded-2xl" />
+                ))}
+              </>
+            ) : (
+              programs.map((program, index) => {
+                const IconComponent = iconMap[program.icon || "Activity"] || Activity;
+                const colorClass = program.color || "from-primary to-orange-light";
+                
+                return (
+                  <motion.div
+                    key={program.id}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
+                    className="group"
+                  >
+                    <motion.div
+                      className="bg-card border-2 border-mint rounded-xl md:rounded-2xl p-4 md:p-6 flex gap-3 md:gap-4 items-start hover:border-primary hover:shadow-card transition-all duration-300"
+                      whileHover={{ x: 10, scale: 1.02 }}
+                    >
+                      <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br ${colorClass} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                        <IconComponent className="w-6 h-6 md:w-7 md:h-7 text-primary-foreground" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 md:gap-3 mb-1 md:mb-2 flex-wrap">
+                          <h3 className="text-lg md:text-xl font-heading font-bold text-foreground">{program.title}</h3>
+                        </div>
+                        <p className="text-sm md:text-base text-muted-foreground">{program.description}</p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:translate-x-1 transition-transform flex-shrink-0 mt-1" />
+                    </motion.div>
+                  </motion.div>
+                );
+              })
+            )}
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
