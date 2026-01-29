@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Smartphone, Square, ShowerHead } from "lucide-react";
+import { ArrowRight, Sparkles, Smartphone, Square, ShowerHead, Users } from "lucide-react";
 import buildingImage from "@/assets/building-exterior.jpg";
 
 export const Hero = () => {
@@ -63,11 +63,29 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="text-base md:text-lg lg:text-xl text-muted-foreground mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0"
+              className="text-base md:text-lg lg:text-xl text-muted-foreground mb-4 md:mb-5 max-w-lg mx-auto lg:mx-0"
             >
               Групповые и индивидуальные занятия для взрослых и детей. 
               <span className="text-primary font-semibold"> ОФП и нейрофитнес для детей 4-14 лет</span>!
             </motion.p>
+
+            {/* Family advantage */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.75 }}
+              className="bg-mint/50 backdrop-blur-sm rounded-xl md:rounded-2xl p-3 md:p-4 mb-4 md:mb-5 border-2 border-primary/30"
+            >
+              <div className="flex items-start gap-2 md:gap-3">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Users className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                </div>
+                <div>
+                  <p className="font-bold text-foreground text-sm md:text-base">Занимайтесь одновременно с ребёнком!</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">Во время детских тренировок всегда есть взрослая группа в соседнем зале. Ребёнок занимается в одном зале, вы — в другом</p>
+                </div>
+              </div>
+            </motion.div>
 
             {/* App CTA */}
             <motion.div
