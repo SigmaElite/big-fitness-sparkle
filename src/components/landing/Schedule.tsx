@@ -18,10 +18,10 @@ interface Schedule {
 }
 
 const fallbackSchedules = [
-  { id: "1", hall_id: "forest", hall_name: "Лесной зал", image_url: scheduleForestHall, sort_order: 1 },
-  { id: "2", hall_id: "glass", hall_name: "Прозрачный зал", image_url: scheduleGlassHall, sort_order: 2 },
-  { id: "3", hall_id: "small", hall_name: "Малый зал", image_url: scheduleSmallHall, sort_order: 3 },
-  { id: "4", hall_id: "big", hall_name: "Большой зал", image_url: scheduleBigHall, sort_order: 4 },
+  { id: "1", hall_id: "forest", hall_name: "Лесной", image_url: scheduleForestHall, sort_order: 1 },
+  { id: "2", hall_id: "glass", hall_name: "Прозрачный", image_url: scheduleGlassHall, sort_order: 2 },
+  { id: "3", hall_id: "small", hall_name: "Малый", image_url: scheduleSmallHall, sort_order: 3 },
+  { id: "4", hall_id: "big", hall_name: "Большой", image_url: scheduleBigHall, sort_order: 4 },
 ];
 
 export const Schedule = () => {
@@ -67,12 +67,12 @@ export const Schedule = () => {
 
   if (isLoading) {
     return (
-      <section id="schedule" className="py-6 md:py-8 bg-card" ref={ref}>
-        <div className="container mx-auto px-4">
+      <section id="schedule" className="py-6 bg-card" ref={ref}>
+        <div className="container mx-auto px-3">
           <div className="text-center mb-3">
-            <Skeleton className="h-8 w-48 mx-auto" />
+            <Skeleton className="h-6 w-40 mx-auto" />
           </div>
-          <Skeleton className="h-12 w-full mb-2" />
+          <Skeleton className="h-10 w-full mb-2" />
           <Skeleton className="w-full aspect-[3/4]" />
         </div>
       </section>
@@ -80,11 +80,11 @@ export const Schedule = () => {
   }
 
   return (
-    <section id="schedule" className="py-6 md:py-8 bg-card" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section id="schedule" className="py-6 bg-card" ref={ref}>
+      <div className="container mx-auto px-3">
         {/* Section header */}
         <div className="text-center mb-3">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-black">
+          <h2 className="text-base sm:text-lg md:text-xl font-heading font-black">
             <span className="text-foreground">Расписание </span>
             <span className="text-primary">занятий</span>
           </h2>
@@ -92,12 +92,12 @@ export const Schedule = () => {
 
         {/* Tabs for halls */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 gap-1 bg-transparent h-auto mb-2">
+          <TabsList className="grid w-full grid-cols-4 gap-1 bg-transparent h-auto mb-2 p-0">
             {schedules.map((schedule) => (
               <TabsTrigger
                 key={schedule.hall_id}
                 value={schedule.hall_id}
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-md py-1.5 px-1 text-[10px] md:text-xs font-semibold transition-all hover:bg-mint-dark"
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-mint text-foreground rounded-md py-1.5 px-1 text-[9px] sm:text-[10px] md:text-xs font-semibold transition-all hover:bg-mint-dark whitespace-nowrap"
               >
                 {schedule.hall_name}
               </TabsTrigger>
@@ -106,14 +106,14 @@ export const Schedule = () => {
 
           {schedules.map((schedule) => (
             <TabsContent key={schedule.hall_id} value={schedule.hall_id} className="mt-0">
-              <div className="bg-mint-light rounded-md p-1 border border-mint overflow-hidden max-h-[66vh] md:max-h-[78vh] overflow-y-auto">
+              <div className="bg-mint-light rounded-lg p-1 border border-mint overflow-hidden max-h-[60vh] sm:max-h-[65vh] md:max-h-[75vh] overflow-y-auto">
                 {!isImageLoaded(schedule.hall_id) && (
-                  <Skeleton className="w-full aspect-[3/4] rounded-sm" />
+                  <Skeleton className="w-full aspect-[3/4] rounded-md" />
                 )}
                 <img
                   src={schedule.image_url}
                   alt={`Расписание - ${schedule.hall_name}`}
-                  className={`w-full h-auto object-cover object-center rounded-sm transition-opacity duration-300 ${
+                  className={`w-full h-auto object-cover object-center rounded-md transition-opacity duration-300 ${
                     isImageLoaded(schedule.hall_id) ? "opacity-100" : "opacity-0 absolute"
                   }`}
                   loading="eager"

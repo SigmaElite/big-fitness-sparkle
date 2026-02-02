@@ -53,52 +53,40 @@ export const AdultPrograms = () => {
   }, []);
 
   return (
-    <section id="adults" className="py-16 md:py-24 bg-mint-light relative overflow-hidden" ref={ref}>
-      {/* Animated background shapes */}
-      <motion.div
-        className="absolute top-20 right-10 w-24 md:w-32 h-24 md:h-32 bg-orange/10 rounded-full blur-2xl"
-        animate={{ scale: [1, 1.3, 1], x: [0, 20, 0] }}
-        transition={{ duration: 6, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-20 left-10 w-32 md:w-48 h-32 md:h-48 bg-mint-dark/30 rounded-full blur-3xl"
-        animate={{ scale: [1.2, 1, 1.2], y: [0, -30, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-
+    <section id="adults" className="py-10 md:py-20 bg-mint-light relative overflow-hidden" ref={ref}>
       <div className="container mx-auto px-4 relative z-10">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 md:mb-16"
+          className="text-center mb-6 md:mb-12"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 bg-card rounded-full px-3 py-1.5 md:px-4 md:py-2 mb-4 md:mb-6 shadow-soft"
+            className="inline-flex items-center gap-1.5 bg-card rounded-full px-3 py-1 mb-3 md:mb-4 shadow-soft"
           >
-            <Dumbbell className="w-4 h-4 md:w-5 md:h-5 text-primary" />
-            <span className="font-semibold text-foreground text-sm md:text-base">Для взрослых</span>
+            <Dumbbell className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+            <span className="font-semibold text-foreground text-xs md:text-sm">Для взрослых</span>
           </motion.div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black mb-3 md:mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-black mb-2">
             <span className="text-foreground">Взрослые </span>
             <span className="text-primary">направления</span>
           </h2>
-          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            Групповые и персональные тренировки. Тренажерного зала у нас нет.
+          <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+            Групповые и персональные тренировки
           </p>
         </motion.div>
 
-        {/* Programs grid - responsive */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 mb-10 md:mb-16">
+        {/* Programs grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-8 md:mb-12">
           {isLoading ? (
             <>
               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <Skeleton key={i} className="h-32 md:h-40 rounded-2xl" />
+                <Skeleton key={i} className="h-24 md:h-32 rounded-xl" />
               ))}
             </>
           ) : (
@@ -110,20 +98,14 @@ export const AdultPrograms = () => {
                   key={program.id}
                   initial={{ opacity: 0, y: 30, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
-                  whileHover={{ y: -10, scale: 1.05 }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.05 }}
                   className="group"
                 >
-                  <div className="bg-card rounded-xl md:rounded-2xl p-4 md:p-6 h-full shadow-soft hover:shadow-card transition-all duration-300 border-2 border-transparent hover:border-primary">
-                    <motion.div
-                      className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br from-mint to-mint-dark flex items-center justify-center mb-2 md:mb-4 group-hover:bg-gradient-to-br group-hover:from-orange group-hover:to-orange-light transition-all duration-300"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <IconComponent className="w-5 h-5 md:w-7 md:h-7 text-foreground group-hover:text-primary-foreground transition-colors" />
-                    </motion.div>
-                    <h3 className="font-heading font-bold text-sm md:text-lg text-foreground mb-1 md:mb-2">{program.title}</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">{program.description}</p>
+                  <div className="bg-card rounded-lg md:rounded-xl p-3 md:p-4 h-full shadow-soft border-2 border-transparent hover:border-primary transition-all duration-300">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-mint to-mint-dark flex items-center justify-center mb-2 group-hover:from-orange group-hover:to-orange-light transition-all duration-300">
+                      <IconComponent className="w-4 h-4 md:w-5 md:h-5 text-foreground group-hover:text-primary-foreground transition-colors" />
+                    </div>
+                    <h3 className="font-heading font-bold text-xs sm:text-sm md:text-base text-foreground leading-tight">{program.title}</h3>
                   </div>
                 </motion.div>
               );
@@ -132,7 +114,7 @@ export const AdultPrograms = () => {
         </div>
 
         {/* Image and CTA */}
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -140,7 +122,7 @@ export const AdultPrograms = () => {
             className="relative"
           >
             <motion.div
-              className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
+              className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl"
               whileHover={{ scale: 1.02 }}
             >
               <img
@@ -152,12 +134,12 @@ export const AdultPrograms = () => {
 
             {/* Badge */}
             <motion.div
-              className="absolute -top-3 -right-3 md:-top-6 md:-right-6 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card"
-              animate={{ y: [0, -10, 0] }}
+              className="absolute -top-2 -right-2 md:-top-4 md:-right-4 bg-card rounded-lg md:rounded-xl p-2 md:p-3 shadow-card"
+              animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <p className="text-xl md:text-2xl font-heading font-bold text-primary">15+</p>
-              <p className="text-xs md:text-sm text-muted-foreground">направлений</p>
+              <p className="text-lg md:text-xl font-heading font-bold text-primary">15+</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground">направлений</p>
             </motion.div>
           </motion.div>
 
@@ -167,29 +149,29 @@ export const AdultPrograms = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-center lg:text-left"
           >
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold mb-4 md:mb-6 text-foreground">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-bold mb-3 text-foreground">
               Индивидуальный подход
             </h3>
-            <p className="text-sm md:text-lg text-muted-foreground mb-4 md:mb-6">
-              Все занятия проходят в малых группах или индивидуально, чтобы тренер мог уделить внимание каждому.
+            <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-4">
+              Все занятия проходят в малых группах или индивидуально.
             </p>
-            <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8">
-              {["Персональные программы", "Опытные тренеры", "Удобное расписание", "Новые залы с шикарным видом"].map((item, i) => (
+            <ul className="space-y-2 mb-4">
+              {["Персональные программы", "Опытные тренеры", "Удобное расписание"].map((item, i) => (
                 <motion.li
                   key={item}
                   initial={{ opacity: 0, x: 20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.8 + i * 0.1 }}
-                  className="flex items-center gap-2 md:gap-3 justify-center lg:justify-start"
+                  className="flex items-center gap-2 justify-center lg:justify-start"
                 >
-                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary-foreground" />
+                  <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-2.5 h-2.5 text-primary-foreground" />
                   </div>
-                  <span className="text-sm md:text-base text-foreground font-medium">{item}</span>
+                  <span className="text-xs sm:text-sm text-foreground font-medium">{item}</span>
                 </motion.li>
               ))}
             </ul>
-            <Button variant="hero" size="xl" className="text-sm md:text-base">
+            <Button variant="hero" size="lg" className="w-full sm:w-auto text-sm">
               Записаться на пробное бесплатное занятие
             </Button>
           </motion.div>
