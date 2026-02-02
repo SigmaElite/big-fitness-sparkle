@@ -165,7 +165,7 @@ export const About = () => {
   }, []);
 
   return (
-    <section id="about" className="py-24 bg-card relative overflow-hidden" ref={ref}>
+    <section id="about" className="py-16 md:py-24 bg-card relative overflow-hidden" ref={ref}>
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -179,23 +179,23 @@ export const About = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 bg-mint rounded-full px-4 py-2 mb-6"
+            className="inline-flex items-center gap-2 bg-mint rounded-full px-3 py-1.5 md:px-4 md:py-2 mb-4 md:mb-6"
           >
-            <Building2 className="w-5 h-5 text-primary" />
-            <span className="font-semibold text-foreground">О студии</span>
+            <Building2 className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+            <span className="font-semibold text-foreground text-sm md:text-base">О студии</span>
           </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black mb-3 md:mb-4">
             <span className="text-foreground">Всё для вашего </span>
             <span className="text-primary">комфорта</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Современная студия фитнеса в Новая Боровая с продуманной инфраструктурой
           </p>
         </motion.div>
@@ -317,7 +317,7 @@ export const About = () => {
         </motion.div>
 
         {/* Features grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -327,24 +327,24 @@ export const About = () => {
               whileHover={{ y: -8 }}
               className="group"
             >
-              <div className="relative bg-gradient-to-br from-mint-light to-card rounded-3xl p-8 h-full border-2 border-mint hover:border-primary transition-all duration-300 overflow-hidden">
+              <div className="relative bg-gradient-to-br from-mint-light to-card rounded-xl md:rounded-2xl lg:rounded-3xl p-4 md:p-6 lg:p-8 h-full border-2 border-mint hover:border-primary transition-all duration-300 overflow-hidden">
                 {/* Hover gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 <motion.div
-                  className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-orange to-orange-light flex items-center justify-center mb-6 shadow-lg"
+                  className="relative w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-lg md:rounded-xl lg:rounded-2xl bg-gradient-to-br from-orange to-orange-light flex items-center justify-center mb-3 md:mb-4 lg:mb-6 shadow-lg"
                   whileHover={{ rotate: 10, scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <feature.icon className="w-8 h-8 text-primary-foreground" />
+                  <feature.icon className="w-5 h-5 md:w-7 md:h-7 lg:w-8 lg:h-8 text-primary-foreground" />
                 </motion.div>
                 
-                <h3 className="relative text-xl font-heading font-bold text-foreground mb-3">{feature.title}</h3>
-                <p className="relative text-muted-foreground">{feature.description}</p>
+                <h3 className="relative text-sm md:text-lg lg:text-xl font-heading font-bold text-foreground mb-1 md:mb-2 lg:mb-3">{feature.title}</h3>
+                <p className="relative text-xs md:text-sm lg:text-base text-muted-foreground">{feature.description}</p>
 
-                {/* Decorative circle */}
+                {/* Decorative circle - hidden on mobile */}
                 <motion.div
-                  className="absolute -bottom-8 -right-8 w-24 h-24 bg-mint rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-300"
+                  className="absolute -bottom-8 -right-8 w-24 h-24 bg-mint rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-300 hidden md:block"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 3, repeat: Infinity }}
                 />
@@ -358,9 +358,9 @@ export const About = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-20 bg-gradient-to-r from-orange to-orange-light rounded-3xl p-8 md:p-12"
+          className="mt-10 md:mt-16 lg:mt-20 bg-gradient-to-r from-orange to-orange-light rounded-xl md:rounded-2xl lg:rounded-3xl p-5 md:p-8 lg:p-12"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 text-center">
             {[
               { value: "630", label: "кв.м площади" },
               { value: "15+", label: "направлений" },
@@ -374,13 +374,13 @@ export const About = () => {
                 transition={{ delay: 1 + index * 0.1, type: "spring" }}
               >
                 <motion.p
-                  className="text-4xl md:text-5xl font-heading font-black text-primary-foreground mb-2"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black text-primary-foreground mb-1 md:mb-2"
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
                 >
                   {stat.value}
                 </motion.p>
-                <p className="text-primary-foreground/80 font-medium">{stat.label}</p>
+                <p className="text-xs sm:text-sm md:text-base text-primary-foreground/80 font-medium">{stat.label}</p>
               </motion.div>
             ))}
           </div>
