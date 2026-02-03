@@ -207,22 +207,22 @@ export const About = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-10 md:mb-16 relative"
         >
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - positioned inside container on mobile */}
           <Button
             variant="ghost"
             size="icon"
             onClick={prevPage}
-            className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
+            className="absolute left-1 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
           >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+            <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
           </Button>
           <Button
             variant="ghost"
             size="icon"
             onClick={nextPage}
-            className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
+            className="absolute right-1 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
           >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+            <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
           </Button>
 
           {/* Grid */}
