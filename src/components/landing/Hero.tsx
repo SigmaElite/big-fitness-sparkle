@@ -61,7 +61,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 max-w-lg mx-auto lg:mx-0"
+              className="text-xs sm:text-sm md:text-lg text-muted-foreground mb-4 max-w-lg mx-auto lg:mx-0 px-2 sm:px-0"
             >
               Групповые и индивидуальные занятия для взрослых и детей. 
               <span className="text-primary font-semibold"> ОФП и нейрофитнес для детей 4-14 лет</span>!

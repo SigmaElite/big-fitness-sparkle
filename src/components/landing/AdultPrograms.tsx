@@ -106,6 +106,7 @@ export const AdultPrograms = () => {
                       <IconComponent className="w-4 h-4 md:w-5 md:h-5 text-foreground group-hover:text-primary-foreground transition-colors" />
                     </div>
                     <h3 className="font-heading font-bold text-xs sm:text-sm md:text-base text-foreground leading-tight">{program.title}</h3>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 leading-snug">{program.description}</p>
                   </div>
                 </motion.div>
               );
