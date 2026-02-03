@@ -150,15 +150,11 @@ export const AdultPrograms = () => {
               />
             </motion.div>
 
-            {/* Badge - positioned inside on mobile */}
-            <motion.div
-              className="absolute -top-2 -right-2 md:-top-6 md:-right-6 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
+            {/* Badge - static, positioned inside on mobile */}
+            <div className="absolute -top-2 -right-2 md:-top-6 md:-right-6 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card">
               <p className="text-lg md:text-2xl font-heading font-bold text-primary">15+</p>
               <p className="text-[10px] md:text-sm text-muted-foreground">направлений</p>
-            </motion.div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -189,8 +185,8 @@ export const AdultPrograms = () => {
                 </motion.li>
               ))}
             </ul>
-            <Button variant="hero" size="xl" className="text-sm md:text-base">
-              Записаться на пробное бесплатное занятие
+            <Button variant="hero" size="lg" className="text-xs md:text-base px-4 md:px-6">
+              Записаться на пробное занятие
             </Button>
           </motion.div>
         </div>
