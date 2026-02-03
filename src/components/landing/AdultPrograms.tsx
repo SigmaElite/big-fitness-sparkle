@@ -131,8 +131,8 @@ export const AdultPrograms = () => {
           )}
         </div>
 
-        {/* Image and CTA */}
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        {/* Image and CTA - centered on mobile */}
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -140,7 +140,7 @@ export const AdultPrograms = () => {
             className="relative overflow-hidden"
           >
             <motion.div
-              className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
+              className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mx-auto max-w-sm lg:max-w-none"
               whileHover={{ scale: 1.02 }}
             >
               <img
@@ -150,14 +150,14 @@ export const AdultPrograms = () => {
               />
             </motion.div>
 
-            {/* Badge */}
+            {/* Badge - positioned inside on mobile */}
             <motion.div
-              className="absolute -top-3 -right-3 md:-top-6 md:-right-6 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card"
+              className="absolute -top-2 -right-2 md:-top-6 md:-right-6 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <p className="text-xl md:text-2xl font-heading font-bold text-primary">15+</p>
-              <p className="text-xs md:text-sm text-muted-foreground">направлений</p>
+              <p className="text-lg md:text-2xl font-heading font-bold text-primary">15+</p>
+              <p className="text-[10px] md:text-sm text-muted-foreground">направлений</p>
             </motion.div>
           </motion.div>
 
@@ -167,7 +167,7 @@ export const AdultPrograms = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-center lg:text-left overflow-hidden"
           >
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold mb-4 md:mb-6 text-foreground">
+            <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading font-bold mb-3 md:mb-6 text-foreground">
               Индивидуальный подход
             </h3>
             <p className="text-sm md:text-lg text-muted-foreground mb-4 md:mb-6">

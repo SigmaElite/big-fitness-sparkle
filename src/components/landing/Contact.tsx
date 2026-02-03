@@ -35,7 +35,7 @@ export const Contact = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contacts" className="py-16 md:py-24 bg-gradient-to-br from-mint-light via-card to-mint-light relative overflow-hidden" ref={ref}>
+    <section id="contacts" className="py-16 md:py-24 bg-gradient-to-br from-mint-light via-card to-mint-light relative overflow-hidden max-w-full" ref={ref}>
       {/* Animated shapes - hidden on mobile for performance */}
       <motion.div
         className="absolute top-10 left-10 w-24 md:w-40 h-24 md:h-40 bg-orange/10 rounded-full blur-3xl hidden md:block"
@@ -75,16 +75,16 @@ export const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start overflow-hidden">
           {/* Contact cards */}
-          <div className="space-y-4 md:space-y-6">
+          <div className="space-y-3 md:space-y-6 overflow-hidden">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={info.title}
-                initial={{ opacity: 0, x: -50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
-                whileHover={{ x: 10, scale: 1.02 }}
+                whileHover={{ scale: 1.02 }}
                 className="group"
               >
                 <div className="bg-card rounded-xl md:rounded-2xl p-4 md:p-6 flex items-center gap-3 md:gap-5 shadow-soft hover:shadow-card transition-all duration-300 border-2 border-transparent hover:border-primary">
@@ -133,9 +133,10 @@ export const Contact = () => {
 
           {/* Map / CTA */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
+            className="overflow-hidden"
           >
             <div className="bg-card rounded-xl md:rounded-2xl lg:rounded-3xl p-5 md:p-6 lg:p-8 shadow-card border-2 border-mint">
               <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-foreground mb-2 md:mb-4">
