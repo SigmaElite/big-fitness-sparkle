@@ -79,7 +79,7 @@ export const Contact = () => {
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-[10px] md:text-xs text-muted-foreground">{info.title}</p>
-                    <p className="text-sm md:text-base font-heading font-bold text-foreground truncate">{info.value}</p>
+                    <p className="text-xs sm:text-sm md:text-base font-heading font-bold text-foreground leading-tight break-words">{info.value}</p>
                     <p className="text-[10px] md:text-xs text-muted-foreground">{info.subvalue}</p>
                   </div>
                 </div>
