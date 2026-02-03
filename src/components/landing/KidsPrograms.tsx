@@ -49,7 +49,7 @@ export const KidsPrograms = () => {
   }, []);
 
   return (
-    <section id="kids" className="py-16 md:py-24 bg-card relative overflow-hidden" ref={ref}>
+    <section id="kids" className="py-16 md:py-24 bg-card relative overflow-hidden max-w-full" ref={ref}>
       {/* Decorative elements - hidden on mobile to prevent overflow */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-mint/30 rounded-full blur-3xl hidden md:block" />
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange/10 rounded-full blur-2xl hidden md:block" />
@@ -82,12 +82,12 @@ export const KidsPrograms = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Image */}
+          {/* Image - no x animation on mobile */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative order-2 lg:order-1"
+            className="relative order-2 lg:order-1 overflow-hidden"
           >
             <motion.div
               className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
@@ -125,19 +125,19 @@ export const KidsPrograms = () => {
               ))}
             </div>
 
-            {/* Age badge */}
+            {/* Age badge - positioned inside on mobile */}
             <motion.div
-              className="absolute -bottom-3 -right-3 md:-bottom-6 md:-right-6 bg-primary rounded-xl md:rounded-2xl p-3 md:p-6 shadow-orange"
+              className="absolute -bottom-2 -right-2 md:-bottom-6 md:-right-6 bg-primary rounded-xl md:rounded-2xl p-2 md:p-6 shadow-orange"
               animate={{ rotate: [-3, 3, -3] }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <p className="text-2xl md:text-4xl font-heading font-black text-primary-foreground">4-14</p>
-              <p className="text-xs md:text-sm text-primary-foreground/80">лет</p>
+              <p className="text-xl md:text-4xl font-heading font-black text-primary-foreground">4-14</p>
+              <p className="text-[10px] md:text-sm text-primary-foreground/80">лет</p>
             </motion.div>
           </motion.div>
 
           {/* Programs list */}
-          <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
+          <div className="space-y-3 md:space-y-6 order-1 lg:order-2 overflow-hidden">
             {isLoading ? (
               <>
                 {[1, 2, 3].map((i) => (
@@ -149,18 +149,18 @@ export const KidsPrograms = () => {
                 const IconComponent = iconMap[program.icon || "Activity"] || Activity;
                 const colorClass = program.color || "from-primary to-orange-light";
                 
-                return (
-                  <motion.div
-                    key={program.id}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
-                    className="group"
-                  >
+                  return (
                     <motion.div
-                      className="bg-card border-2 border-mint rounded-xl md:rounded-2xl p-4 md:p-6 flex gap-3 md:gap-4 items-start hover:border-primary hover:shadow-card transition-all duration-300"
-                      whileHover={{ x: 10, scale: 1.02 }}
+                      key={program.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
+                      className="group"
                     >
+                      <motion.div
+                        className="bg-card border-2 border-mint rounded-xl md:rounded-2xl p-3 md:p-6 flex gap-2 md:gap-4 items-start hover:border-primary hover:shadow-card transition-all duration-300"
+                        whileHover={{ scale: 1.02 }}
+                      >
                       <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br ${colorClass} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
                         <IconComponent className="w-6 h-6 md:w-7 md:h-7 text-primary-foreground" />
                       </div>

@@ -53,7 +53,7 @@ export const AdultPrograms = () => {
   }, []);
 
   return (
-    <section id="adults" className="py-16 md:py-24 bg-mint-light relative overflow-hidden" ref={ref}>
+    <section id="adults" className="py-16 md:py-24 bg-mint-light relative overflow-hidden max-w-full" ref={ref}>
       {/* Animated background shapes - hidden on mobile to prevent overflow */}
       <motion.div
         className="absolute top-20 right-10 w-32 h-32 bg-orange/10 rounded-full blur-2xl hidden md:block"
@@ -134,10 +134,10 @@ export const AdultPrograms = () => {
         {/* Image and CTA */}
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative"
+            className="relative overflow-hidden"
           >
             <motion.div
               className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
@@ -162,10 +162,10 @@ export const AdultPrograms = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-center lg:text-left"
+            className="text-center lg:text-left overflow-hidden"
           >
             <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold mb-4 md:mb-6 text-foreground">
               Индивидуальный подход
@@ -175,13 +175,13 @@ export const AdultPrograms = () => {
             </p>
             <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8">
               {["Персональные программы", "Опытные тренеры", "Удобное расписание", "Новые залы с шикарным видом"].map((item, i) => (
-                <motion.li
-                  key={item}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.8 + i * 0.1 }}
-                  className="flex items-center gap-2 md:gap-3 justify-center lg:justify-start"
-                >
+                  <motion.li
+                    key={item}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.8 + i * 0.1 }}
+                    className="flex items-center gap-2 md:gap-3 justify-center lg:justify-start"
+                  >
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                     <Sparkles className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary-foreground" />
                   </div>
