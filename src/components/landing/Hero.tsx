@@ -5,7 +5,7 @@ import buildingImage from "@/assets/building-exterior.jpg";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero pt-24 lg:pt-40">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero pt-24 lg:pt-40 max-w-full">
       {/* Animated background shapes - hidden on mobile to prevent overflow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <motion.div
@@ -27,14 +27,14 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Content */}
+          {/* Content - no x animation on mobile */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center lg:text-left"
+            className="text-center lg:text-left overflow-hidden"
           >
             {/* Badge */}
             <motion.div
@@ -51,19 +51,17 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-black leading-tight mb-4 md:mb-6"
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-black leading-tight mb-4 md:mb-6"
             >
               <span className="text-foreground">Фитнес для </span>
-              <span className="text-primary">
-                всей семьи
-              </span>
+              <span className="text-primary">всей семьи</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="text-base md:text-lg lg:text-xl text-muted-foreground mb-4 md:mb-5 max-w-lg mx-auto lg:mx-0"
+              className="text-sm md:text-lg lg:text-xl text-muted-foreground mb-4 md:mb-5"
             >
               Групповые и индивидуальные занятия для взрослых и детей. 
               <span className="text-primary font-semibold"> ОФП и нейрофитнес для детей 4-14 лет</span>!
@@ -152,7 +150,7 @@ export const Hero = () => {
               {[
                 { icon: Square, value: "630", label: "кв.м" },
                 { icon: Sparkles, value: "4", label: "зала" },
-                { icon: ShowerHead, value: "3", label: "раздевалки с душевыми" },
+                { icon: ShowerHead, value: "3", label: "душевых" },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
