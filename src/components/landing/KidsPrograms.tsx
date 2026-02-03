@@ -50,9 +50,9 @@ export const KidsPrograms = () => {
 
   return (
     <section id="kids" className="py-16 md:py-24 bg-card relative overflow-hidden" ref={ref}>
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-32 md:w-64 h-32 md:h-64 bg-mint/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-24 md:w-48 h-24 md:h-48 bg-orange/10 rounded-full blur-2xl" />
+      {/* Decorative elements - hidden on mobile to prevent overflow */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-mint/30 rounded-full blur-3xl hidden md:block" />
+      <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange/10 rounded-full blur-2xl hidden md:block" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section header */}
