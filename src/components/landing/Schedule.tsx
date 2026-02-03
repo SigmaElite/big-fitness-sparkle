@@ -103,8 +103,8 @@ export const Schedule = () => {
 
   return (
     <>
-      <section id="schedule" className="py-6 bg-card" ref={ref}>
-        <div className="container mx-auto px-3">
+      <section id="schedule" className="py-6 bg-card overflow-x-hidden w-full max-w-full" ref={ref}>
+        <div className="container mx-auto px-3 sm:px-4 max-w-full">
           {/* Section header */}
           <div className="text-center mb-3">
             <h2 className="text-base sm:text-lg md:text-xl font-heading font-black">

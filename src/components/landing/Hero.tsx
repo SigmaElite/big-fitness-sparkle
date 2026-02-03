@@ -5,7 +5,7 @@ import buildingImage from "@/assets/building-exterior.jpg";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero pt-20 pb-8 md:pt-32 md:pb-16">
+    <section className="relative min-h-screen flex items-center bg-gradient-hero pt-20 pb-8 md:pt-32 md:pb-16 overflow-x-hidden w-full max-w-full">
       {/* Animated background shapes - hidden on mobile */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <motion.div
@@ -27,8 +27,8 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+      <div className="container mx-auto px-3 sm:px-4 relative z-10 max-w-full">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
