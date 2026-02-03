@@ -3,9 +3,9 @@ import { Heart, Smartphone } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-mint text-foreground py-6 md:py-10">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col gap-4 md:gap-6">
+    <footer className="bg-mint text-foreground py-6 md:py-10 overflow-x-hidden w-full max-w-full">
+      <div className="container mx-auto px-3 sm:px-4 max-w-full">
+        <div className="flex flex-col gap-4 md:gap-6 w-full">
           {/* Top row */}
           <div className="flex flex-col items-center gap-4">
             {/* Logo */}

@@ -165,8 +165,8 @@ export const About = () => {
   }, []);
 
   return (
-    <section id="about" className="py-10 md:py-20 bg-card relative overflow-hidden" ref={ref}>
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="about" className="py-10 md:py-20 bg-card relative overflow-x-hidden w-full max-w-full" ref={ref}>
+      <div className="container mx-auto px-3 sm:px-4 relative z-10 max-w-full">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
