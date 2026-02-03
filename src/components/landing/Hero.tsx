@@ -6,10 +6,10 @@ import buildingImage from "@/assets/building-exterior.jpg";
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero pt-24 lg:pt-40">
-      {/* Animated background shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Animated background shapes - hidden on mobile to prevent overflow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <motion.div
-          className="absolute -top-20 -right-20 w-48 md:w-96 h-48 md:h-96 bg-mint rounded-full opacity-60 blur-3xl"
+          className="absolute -top-20 -right-20 w-96 h-96 bg-mint rounded-full opacity-60 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             x: [0, 30, 0],
@@ -18,7 +18,7 @@ export const Hero = () => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-1/2 -left-20 w-40 md:w-80 h-40 md:h-80 bg-orange/20 rounded-full blur-3xl"
+          className="absolute top-1/2 -left-20 w-80 h-80 bg-orange/20 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             x: [0, 20, 0],

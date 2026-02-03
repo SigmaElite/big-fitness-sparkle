@@ -54,14 +54,14 @@ export const AdultPrograms = () => {
 
   return (
     <section id="adults" className="py-16 md:py-24 bg-mint-light relative overflow-hidden" ref={ref}>
-      {/* Animated background shapes */}
+      {/* Animated background shapes - hidden on mobile to prevent overflow */}
       <motion.div
-        className="absolute top-20 right-10 w-24 md:w-32 h-24 md:h-32 bg-orange/10 rounded-full blur-2xl"
+        className="absolute top-20 right-10 w-32 h-32 bg-orange/10 rounded-full blur-2xl hidden md:block"
         animate={{ scale: [1, 1.3, 1], x: [0, 20, 0] }}
         transition={{ duration: 6, repeat: Infinity }}
       />
       <motion.div
-        className="absolute bottom-20 left-10 w-32 md:w-48 h-32 md:h-48 bg-mint-dark/30 rounded-full blur-3xl"
+        className="absolute bottom-20 left-10 w-48 h-48 bg-mint-dark/30 rounded-full blur-3xl hidden md:block"
         animate={{ scale: [1.2, 1, 1.2], y: [0, -30, 0] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
