@@ -137,7 +137,7 @@ export const KidsPrograms = () => {
           </motion.div>
 
           {/* Programs list */}
-          <div className="space-y-3 md:space-y-6 order-1 lg:order-2 overflow-hidden">
+          <div className="space-y-3 md:space-y-6 order-1 lg:order-2 overflow-hidden lg:overflow-visible lg:py-2 lg:-my-2 lg:px-2 lg:-mx-2">
             {isLoading ? (
               <>
                 {[1, 2, 3].map((i) => (

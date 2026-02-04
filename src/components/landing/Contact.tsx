@@ -75,9 +75,9 @@ export const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start overflow-hidden">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start overflow-hidden lg:overflow-visible">
           {/* Contact cards */}
-          <div className="space-y-3 md:space-y-6 overflow-hidden">
+          <div className="space-y-3 md:space-y-6 overflow-hidden lg:overflow-visible lg:py-2 lg:-my-2 lg:px-2 lg:-mx-2">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={info.title}
