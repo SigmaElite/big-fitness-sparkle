@@ -1,9 +1,5 @@
 ---
 deployment:
-  target: /home/bigfitness/public_html
-  exclude:
-    - .git
-    - .github
-    - .gitignore
-    - node_modules
-    - .env
+  tasks:
+    - export DEPLOYPATH=/home/bigfitness/public_html
+    - /bin/cp -R * $DEPLOYPATH
