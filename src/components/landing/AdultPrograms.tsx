@@ -150,10 +150,10 @@ export const AdultPrograms = () => {
               />
             </motion.div>
 
-            {/* Badge - static, positioned with more margin from corner */}
-            <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card">
-              <p className="text-lg md:text-2xl font-heading font-bold text-primary">15+</p>
-              <p className="text-[10px] md:text-sm text-muted-foreground">направлений</p>
+            {/* Badge - compact, touching the corner */}
+            <div className="absolute top-0 right-0 bg-card rounded-bl-xl md:rounded-bl-2xl p-1.5 md:p-2.5 shadow-card">
+              <p className="text-sm md:text-lg font-heading font-bold text-primary leading-none">15+</p>
+              <p className="text-[8px] md:text-xs text-muted-foreground">направлений</p>
             </div>
           </motion.div>
 
