@@ -1,0 +1,9 @@
+---
+deployment:
+  target: /home/bigfitness/public_html
+  exclude:
+    - .git
+    - .github
+    - .gitignore
+    - node_modules
+    - .env
