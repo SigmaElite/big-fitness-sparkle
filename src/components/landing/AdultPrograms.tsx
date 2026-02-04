@@ -150,8 +150,8 @@ export const AdultPrograms = () => {
               />
             </motion.div>
 
-            {/* Badge - static, positioned inside on mobile */}
-            <div className="absolute -top-2 -right-2 md:-top-6 md:-right-6 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card">
+            {/* Badge - static, positioned with more margin from corner */}
+            <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card">
               <p className="text-lg md:text-2xl font-heading font-bold text-primary">15+</p>
               <p className="text-[10px] md:text-sm text-muted-foreground">направлений</p>
             </div>
