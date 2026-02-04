@@ -22,7 +22,7 @@ const buttonVariants = cva(
         link:
           "text-primary underline-offset-4 hover:underline",
         hero:
-          "bg-gradient-to-r from-orange to-orange-light text-primary-foreground px-8 py-4 text-lg font-bold hover:scale-110 shadow-lg active:scale-95",
+          "bg-gradient-to-r from-orange to-orange-light text-primary-foreground px-8 py-4 text-lg font-bold shadow-lg active:scale-95",
         mint:
           "bg-mint text-foreground hover:bg-mint-dark hover:scale-105 shadow-lg",
         white:
