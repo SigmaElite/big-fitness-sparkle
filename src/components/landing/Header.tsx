@@ -133,9 +133,10 @@ export const Header = () => {
               href="https://t.me/+375292788806"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-primary"
+              className="flex items-center gap-1 px-2 py-1.5 text-primary"
             >
-              <Send className="w-5 h-5" />
+              <Send className="w-4 h-4" />
+              <span className="text-xs font-medium">Telegram</span>
             </a>
             <a
               href="tel:+375295060605"
