@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Clock, MessageCircle, Instagram, Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
   {
@@ -30,9 +31,6 @@ const socials = [
   { icon: MessageCircle, label: "Viber", href: "#" },
   { icon: Send, label: "Telegram", href: "https://t.me/+375292788806" },
 ];
-
-const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
-const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
 
 export const Contact = () => {
   const ref = useRef(null);
@@ -63,30 +61,20 @@ export const Contact = () => {
     const message = `🏋️ Новая заявка на пробное занятие!\n\n👤 Имя: ${formData.name}\n📱 Телефон: ${formData.phone}\n📋 Направление: ${formData.direction || "Не указано"}`;
 
     try {
-      const response = await fetch(
-        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-            parse_mode: "HTML",
-          }),
-        }
-      );
+      const { data, error } = await supabase.functions.invoke("send-telegram", {
+        body: {
+          name: formData.name,
+          phone: formData.phone,
+          direction: formData.direction,
+        },
+      });
 
-      if (response.ok) {
-        toast({
-          title: "Заявка отправлена!",
-          description: "Мы свяжемся с вами в ближайшее время",
-        });
-        setFormData({ name: "", phone: "", direction: "" });
-      } else {
-        throw new Error("Failed to send");
-      }
+      if (error) throw error;
+      toast({
+        title: "Заявка отправлена!",
+        description: "Мы свяжемся с вами в ближайшее время",
+      });
+      setFormData({ name: "", phone: "", direction: "" });
     } catch (error) {
       toast({
         title: "Ошибка отправки",
