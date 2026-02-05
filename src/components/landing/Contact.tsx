@@ -1,7 +1,8 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Clock, MessageCircle, Instagram, Send } from "lucide-react";
+import { MapPin, Phone, Clock, MessageCircle, Instagram, Send, Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const contactInfo = [
   {
@@ -30,9 +31,72 @@ const socials = [
   { icon: Send, label: "Telegram", href: "https://t.me/+375292788806" },
 ];
 
+const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
+const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
+
 export const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { toast } = useToast();
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    direction: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.phone) {
+      toast({
+        title: "Ошибка",
+        description: "Пожалуйста, заполните имя и телефон",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const message = `🏋️ Новая заявка на пробное занятие!\n\n👤 Имя: ${formData.name}\n📱 Телефон: ${formData.phone}\n📋 Направление: ${formData.direction || "Не указано"}`;
+
+    try {
+      const response = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: "HTML",
+          }),
+        }
+      );
+
+      if (response.ok) {
+        toast({
+          title: "Заявка отправлена!",
+          description: "Мы свяжемся с вами в ближайшее время",
+        });
+        setFormData({ name: "", phone: "", direction: "" });
+      } else {
+        throw new Error("Failed to send");
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка отправки",
+        description: "Позвоните нам по телефону +375 29 506 06 05",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contacts" className="py-16 md:py-24 bg-gradient-to-br from-mint-light via-card to-mint-light relative overflow-hidden max-w-full" ref={ref}>
@@ -146,37 +210,55 @@ export const Contact = () => {
                 Оставьте заявку, и мы свяжемся с вами для уточнения деталей
               </p>
               
-              <form className="space-y-3 md:space-y-4">
+              <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <input
                     type="text"
                     placeholder="Ваше имя"
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
                   />
                 </div>
                 <div>
                   <input
                     type="tel"
                     placeholder="Телефон"
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
                   />
                 </div>
                 <div>
-                  <select className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors text-muted-foreground text-sm md:text-base">
+                  <select 
+                    value={formData.direction}
+                    onChange={(e) => setFormData({ ...formData, direction: e.target.value })}
+                    className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors text-muted-foreground text-sm md:text-base"
+                  >
                     <option value="">Выберите направление</option>
-                    <option value="kids-ofp">ОФП и нейрофитнес для детей</option>
-                    <option value="kids-race">Гонки с препятствиями</option>
-                    <option value="yoga">Йога</option>
-                    <option value="pilates">Пилатес</option>
-                    <option value="kickboxing">Кикбоксинг</option>
-                    <option value="dance">Танцы</option>
-                    <option value="strength">Силовые тренировки</option>
-                    <option value="personal">Персональные коррекционные тренировки</option>
-                    <option value="other">Другое</option>
+                    <option value="ОФП и нейрофитнес для детей">ОФП и нейрофитнес для детей</option>
+                    <option value="Гонки с препятствиями">Гонки с препятствиями</option>
+                    <option value="Йога">Йога</option>
+                    <option value="Пилатес">Пилатес</option>
+                    <option value="Кикбоксинг">Кикбоксинг</option>
+                    <option value="Танцы">Танцы</option>
+                    <option value="Силовые тренировки">Силовые тренировки</option>
+                    <option value="Персональные коррекционные тренировки">Персональные коррекционные тренировки</option>
+                    <option value="Другое">Другое</option>
                   </select>
                 </div>
-                <Button variant="hero" size="xl" className="w-full text-sm md:text-base">
-                  Записаться на пробное бесплатное занятие
+                <Button 
+                  type="submit" 
+                  variant="hero" 
+                  size="lg" 
+                  className="w-full text-[11px] md:text-base py-3 md:py-4 px-2 md:px-6"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    "Записаться на пробное занятие"
+                  )}
                 </Button>
               </form>
 

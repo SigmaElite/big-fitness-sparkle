@@ -1,15 +1,21 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, MapPin, Smartphone } from "lucide-react";
+import { Menu, X, Phone, MapPin, Smartphone, Send } from "lucide-react";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "#programs", label: "Направления" },
   { href: "#kids", label: "Детям" },
   { href: "#adults", label: "Взрослым" },
   { href: "#about", label: "О нас" },
   { href: "#contacts", label: "Контакты" },
 ];
+
+const scrollToForm = () => {
+  const contactSection = document.getElementById("contacts");
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -116,13 +122,21 @@ export const Header = () => {
               </svg>
               <span className="font-semibold">Telegram</span>
             </a>
-            <Button variant="hero" size="lg" className="text-sm">
+            <Button variant="hero" size="lg" className="text-sm" onClick={scrollToForm}>
               Записаться на пробное
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
+            <a
+              href="https://t.me/+375292788806"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-primary"
+            >
+              <Send className="w-5 h-5" />
+            </a>
             <a
               href="tel:+375295060605"
               className="p-2 text-primary"
@@ -202,8 +216,8 @@ export const Header = () => {
                 <span className="text-xs font-medium">Google Play</span>
               </a>
             </div>
-            <Button variant="hero" size="lg" className="mt-2 text-sm">
-              Записаться на пробное бесплатное занятие
+            <Button variant="hero" size="lg" className="mt-2 text-sm" onClick={() => { setIsOpen(false); scrollToForm(); }}>
+              Записаться на пробное занятие
             </Button>
           </div>
         </motion.nav>
