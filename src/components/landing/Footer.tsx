@@ -28,7 +28,7 @@ export const Footer = () => {
                 Приложение:
               </span>
               <a
-                href="https://apps.apple.com/app/big-fitness"
+                href="https://apps.apple.com/ru/app/big-fitness/id6745080653"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 bg-foreground text-card px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg hover:bg-foreground/90 transition-colors"
@@ -39,7 +39,7 @@ export const Footer = () => {
                 <span className="text-[10px] md:text-xs font-medium">App Store</span>
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.bigfitness"
+                href="https://play.google.com/store/apps/details?id=listok.bigfitness&hl=ru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 bg-foreground text-card px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg hover:bg-foreground/90 transition-colors"

@@ -49,7 +49,7 @@ export const Header = () => {
               Скачайте приложение:
             </span>
             <a
-              href="https://apps.apple.com/app/big-fitness"
+              href="https://apps.apple.com/ru/app/big-fitness/id6745080653"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 bg-foreground text-card px-3 py-1 rounded-lg hover:bg-foreground/90 transition-colors"
@@ -60,7 +60,7 @@ export const Header = () => {
               <span className="text-xs font-medium">App Store</span>
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=com.bigfitness"
+              href="https://play.google.com/store/apps/details?id=listok.bigfitness&hl=ru"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 bg-foreground text-card px-3 py-1 rounded-lg hover:bg-foreground/90 transition-colors"
@@ -194,7 +194,7 @@ export const Header = () => {
             
             <div className="flex gap-2 pt-2">
               <a
-                href="https://apps.apple.com/app/big-fitness"
+                href="https://apps.apple.com/ru/app/big-fitness/id6745080653"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 bg-foreground text-card px-3 py-2.5 rounded-lg flex-1 justify-center"
@@ -205,7 +205,7 @@ export const Header = () => {
                 <span className="text-xs font-medium">App Store</span>
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.bigfitness"
+                href="https://play.google.com/store/apps/details?id=listok.bigfitness&hl=ru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 bg-foreground text-card px-3 py-2.5 rounded-lg flex-1 justify-center"
