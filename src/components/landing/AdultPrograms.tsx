@@ -185,9 +185,11 @@ export const AdultPrograms = () => {
                 </motion.li>
               ))}
             </ul>
-            <Button variant="hero" size="lg" className="text-[10px] md:text-base px-3 md:px-6">
-              Записаться на пробное занятие
-            </Button>
+            <a href="#contacts" className="inline-block">
+              <Button variant="hero" size="lg" className="text-xs sm:text-sm md:text-base px-3 md:px-6">
+                Записаться на пробное занятие
+              </Button>
+            </a>
           </motion.div>
         </div>
       </div>
