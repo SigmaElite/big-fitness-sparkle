@@ -103,7 +103,7 @@ export const Hero = () => {
               </div>
               <div className="flex gap-2">
                 <a
-                  href="https://apps.apple.com/app/big-fitness"
+                  href="https://apps.apple.com/ru/app/big-fitness/id6745080653"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 md:gap-2 bg-foreground text-card px-3 md:px-4 py-2 rounded-lg md:rounded-xl hover:bg-foreground/90 transition-colors flex-1 justify-center"
@@ -114,7 +114,7 @@ export const Hero = () => {
                   <span className="font-medium text-xs md:text-sm">App Store</span>
                 </a>
                 <a
-                  href="https://play.google.com/store/apps/details?id=com.bigfitness"
+                  href="https://play.google.com/store/apps/details?id=listok.bigfitness&hl=ru"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 md:gap-2 bg-foreground text-card px-3 md:px-4 py-2 rounded-lg md:rounded-xl hover:bg-foreground/90 transition-colors flex-1 justify-center"
@@ -134,10 +134,12 @@ export const Hero = () => {
               transition={{ delay: 0.9 }}
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start"
             >
-              <Button variant="hero" size="xl" className="group text-sm md:text-base">
-                Записаться на пробное бесплатное занятие
-                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <a href="#contacts">
+                <Button variant="hero" size="xl" className="group text-sm md:text-base">
+                  Записаться на пробное бесплатное занятие
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </a>
             </motion.div>
 
             {/* Stats - responsive grid */}

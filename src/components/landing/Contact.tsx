@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Clock, MessageCircle, Instagram, Send, Loader2 } from "lucide-react";
+import { MapPin, Phone, Clock, Instagram, Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -27,8 +27,7 @@ const contactInfo = [
 ];
 
 const socials = [
-  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/bigfitness_nb" },
-  { icon: MessageCircle, label: "Viber", href: "#" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/bigfitness_nb/" },
   { icon: Send, label: "Telegram", href: "https://t.me/+375292788806" },
 ];
 
