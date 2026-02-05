@@ -134,9 +134,9 @@ export const Hero = () => {
               transition={{ delay: 0.9 }}
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start"
             >
-              <a href="#contacts">
-                <Button variant="hero" size="xl" className="group text-sm md:text-base">
-                  Записаться на пробное бесплатное занятие
+              <a href="#contacts" className="w-full sm:w-auto">
+                <Button variant="hero" size="lg" className="group text-xs sm:text-sm md:text-base w-full sm:w-auto">
+                  Записаться на пробное занятие
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </a>

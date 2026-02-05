@@ -183,9 +183,11 @@ export const KidsPrograms = () => {
               transition={{ delay: 0.9 }}
               className="pt-2 md:pt-4"
             >
-              <Button variant="hero" size="xl" className="w-full sm:w-auto text-sm md:text-base">
-                Записаться на пробное бесплатное занятие
-              </Button>
+              <a href="#contacts" className="inline-block w-full sm:w-auto">
+                <Button variant="hero" size="lg" className="w-full sm:w-auto text-xs sm:text-sm md:text-base">
+                  Записаться на пробное занятие
+                </Button>
+              </a>
             </motion.div>
           </div>
         </div>
