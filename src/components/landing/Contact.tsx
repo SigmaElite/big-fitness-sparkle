@@ -27,7 +27,7 @@ const contactInfo = [
 ];
 
 const socials = [
-  { icon: Instagram, label: "Instagram", href: "#" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/bigfitness_nb" },
   { icon: MessageCircle, label: "Viber", href: "#" },
   { icon: Send, label: "Telegram", href: "https://t.me/+375292788806" },
 ];
