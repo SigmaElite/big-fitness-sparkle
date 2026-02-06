@@ -11,7 +11,7 @@ const contactInfo = [
     title: "Адрес",
     value: "Новая Боровая, Камова, 7а",
     subvalue: "Минск",
-    href: "https://yandex.by/maps/-/CHEOeF~G",
+    href: "https://yandex.by/maps/157/minsk/?ll=27.692784%2C53.950894&mode=search&text=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%9A%D0%B0%D0%BC%D0%BE%D0%B2%D0%B0%2C%207%D0%B0&z=17",
   },
   {
     icon: Phone,
@@ -46,13 +46,59 @@ export const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const formatPhoneNumber = (value: string): string => {
+    const digits = value.replace(/\D/g, '');
+    const limited = digits.substring(0, 12);
+    
+    let formatted = '';
+    if (limited.length > 0) {
+      formatted = '+' + limited.substring(0, 3);
+    }
+    if (limited.length >= 4) {
+      formatted += ' (' + limited.substring(3, 5);
+    }
+    if (limited.length >= 5) {
+      formatted += ')';
+    }
+    if (limited.length >= 6) {
+      formatted += ' ' + limited.substring(5, 8);
+    }
+    if (limited.length >= 9) {
+      formatted += '-' + limited.substring(8, 10);
+    }
+    if (limited.length >= 11) {
+      formatted += '-' + limited.substring(10, 12);
+    }
+    return formatted;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setFormData({ ...formData, phone: formatted });
+  };
+
+  const getPhoneDigits = (phone: string): string => {
+    return phone.replace(/\D/g, '');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const phoneDigits = getPhoneDigits(formData.phone);
     
     if (!formData.name || !formData.phone) {
       toast({
         title: "Ошибка",
         description: "Пожалуйста, заполните имя и телефон",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (phoneDigits.length !== 12) {
+      toast({
+        title: "Ошибка",
+        description: "Номер телефона должен содержать 12 цифр",
         variant: "destructive",
       });
       return;
@@ -227,7 +273,7 @@ export const Contact = () => {
                     type="tel"
                     placeholder="+375 (25) 123-45-67"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={handlePhoneChange}
                     className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
                   />
                 </div>
