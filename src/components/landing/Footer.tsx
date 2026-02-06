@@ -51,9 +51,29 @@ export const Footer = () => {
               </a>
             </div>
 
+            {/* Contact info */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm">
+              <a
+                href="https://yandex.by/maps/-/CHEOeF~G"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/70 hover:text-primary transition-colors flex items-center gap-1"
+              >
+                <span>📍</span>
+                <span>Новая Боровая, Камова, 7а</span>
+              </a>
+              <a
+                href="tel:+375295060605"
+                className="text-foreground/70 hover:text-primary transition-colors flex items-center gap-1"
+              >
+                <span>📞</span>
+                <span>+375 29 506 06 05</span>
+              </a>
+            </div>
+
             {/* Nav links */}
             <nav className="flex flex-wrap justify-center gap-4 md:gap-6">
-              {["Направления", "Детям", "Взрослым", "О нас", "Контакты"].map((link) => (
+              {["Детям", "Взрослым", "О нас", "Контакты"].map((link) => (
                 <motion.a
                   key={link}
                   href={`#${link.toLowerCase()}`}

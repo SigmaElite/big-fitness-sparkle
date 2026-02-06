@@ -11,18 +11,21 @@ const contactInfo = [
     title: "Адрес",
     value: "Новая Боровая, Камова, 7а",
     subvalue: "Минск",
+    href: "https://yandex.by/maps/-/CHEOeF~G",
   },
   {
     icon: Phone,
     title: "Телефон",
     value: "+375 29 506 06 05",
     subvalue: "Звоните в рабочее время",
+    href: "tel:+375295060605",
   },
   {
     icon: Clock,
     title: "Часы работы",
     value: "Ежедневно: 8:00 - 22:00",
     subvalue: "Без выходных",
+    href: undefined,
   },
 ];
 
@@ -129,15 +132,8 @@ export const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start overflow-hidden lg:overflow-visible">
           {/* Contact cards */}
           <div className="space-y-3 md:space-y-6 overflow-hidden lg:overflow-visible lg:py-2 lg:-my-2 lg:px-2 lg:-mx-2">
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={info.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
-                whileHover={{ scale: 1.02 }}
-                className="group"
-              >
+            {contactInfo.map((info, index) => {
+              const content = (
                 <div className="bg-card rounded-xl md:rounded-2xl p-4 md:p-6 flex items-center gap-3 md:gap-5 shadow-soft hover:shadow-card transition-all duration-300 border-2 border-transparent hover:border-primary">
                   <motion.div
                     className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-orange to-orange-light flex items-center justify-center flex-shrink-0"
@@ -152,8 +148,27 @@ export const Contact = () => {
                     <p className="text-xs md:text-sm text-muted-foreground">{info.subvalue}</p>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              );
+
+              return (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="group"
+                >
+                  {info.href ? (
+                    <a href={info.href} target={info.href.startsWith("http") ? "_blank" : undefined} rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                      {content}
+                    </a>
+                  ) : (
+                    content
+                  )}
+                </motion.div>
+              );
+            })}
 
             {/* Social links */}
             <motion.div
@@ -210,7 +225,7 @@ export const Contact = () => {
                 <div>
                   <input
                     type="tel"
-                    placeholder="Телефон"
+                    placeholder="+375 (25) 123-45-67"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
