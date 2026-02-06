@@ -11,7 +11,7 @@ const contactInfo = [
     title: "Адрес",
     value: "Новая Боровая, Камова, 7а",
     subvalue: "Минск",
-    href: "https://yandex.by/maps/157/minsk/?ll=27.692784%2C53.950894&mode=search&text=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%9A%D0%B0%D0%BC%D0%BE%D0%B2%D0%B0%2C%207%D0%B0&z=17",
+    href: "https://yandex.by/maps/org/big_fitness/237804892693/",
   },
   {
     icon: Phone,
@@ -41,7 +41,7 @@ export const Contact = () => {
   
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    phone: "+375",
     direction: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
