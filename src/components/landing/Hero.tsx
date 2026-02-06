@@ -193,15 +193,23 @@ export const Hero = () => {
             </motion.div>
 
             {/* Floating badges */}
-            <motion.div
-              className="absolute -top-2 md:-top-4 -left-2 md:-left-4 bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card z-20"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            <a
+              href="https://apps.apple.com/ru/app/big-fitness/id6745080653"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute -top-2 md:-top-4 -left-2 md:-left-4 z-20"
             >
-              <Smartphone className="w-6 h-6 md:w-8 md:h-8 text-primary mb-0.5 md:mb-1" />
-              <p className="text-xs md:text-sm font-bold text-foreground">Приложение</p>
-              <p className="text-[10px] md:text-xs text-muted-foreground">Big Fitness</p>
-            </motion.div>
+              <motion.div
+                className="bg-card rounded-xl md:rounded-2xl p-2 md:p-4 shadow-card cursor-pointer hover:shadow-lg transition-shadow"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <Smartphone className="w-6 h-6 md:w-8 md:h-8 text-primary mb-0.5 md:mb-1" />
+                <p className="text-xs md:text-sm font-bold text-foreground">Приложение</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground">Big Fitness</p>
+              </motion.div>
+            </a>
 
             <motion.div
               className="absolute -bottom-2 md:-bottom-4 -right-2 md:-right-4 bg-primary rounded-xl md:rounded-2xl p-2 md:p-4 shadow-orange z-20"
