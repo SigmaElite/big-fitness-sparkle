@@ -86,10 +86,23 @@ export const Contact = () => {
     
     const phoneDigits = getPhoneDigits(formData.phone);
     
-    if (!formData.name || !formData.phone) {
+    // Validate name - only letters, spaces, and hyphens
+    const nameRegex = /^[а-яёА-ЯЁa-zA-Z\s\-]+$/;
+    const sanitizedName = formData.name.trim().substring(0, 100);
+    
+    if (!sanitizedName || sanitizedName.length < 1) {
       toast({
         title: "Ошибка",
-        description: "Пожалуйста, заполните имя и телефон",
+        description: "Пожалуйста, введите ваше имя",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!nameRegex.test(sanitizedName)) {
+      toast({
+        title: "Ошибка",
+        description: "Имя может содержать только буквы, пробелы и дефисы",
         variant: "destructive",
       });
       return;
@@ -106,14 +119,12 @@ export const Contact = () => {
 
     setIsSubmitting(true);
 
-    const message = `🏋️ Новая заявка на пробное занятие!\n\n👤 Имя: ${formData.name}\n📱 Телефон: ${formData.phone}\n📋 Направление: ${formData.direction || "Не указано"}`;
-
     try {
       const { data, error } = await supabase.functions.invoke("send-telegram", {
         body: {
-          name: formData.name,
+          name: sanitizedName,
           phone: formData.phone,
-          direction: formData.direction,
+          direction: formData.direction?.substring(0, 100) || "",
         },
       });
 
@@ -122,8 +133,9 @@ export const Contact = () => {
         title: "Заявка отправлена!",
         description: "Мы свяжемся с вами в ближайшее время",
       });
-      setFormData({ name: "", phone: "", direction: "" });
+      setFormData({ name: "", phone: "+375", direction: "" });
     } catch (error) {
+      console.error("Form submission error:", error);
       toast({
         title: "Ошибка отправки",
         description: "Позвоните нам по телефону +375 29 506 06 05",
