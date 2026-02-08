@@ -11,7 +11,7 @@ const contactInfo = [
     title: "Адрес",
     value: "Новая Боровая, Камова, 7а",
     subvalue: "Минск",
-    href: "https://yandex.by/maps/-/CHEjzBcp",
+    href: "https://yandex.by/maps/?text=Большой Фитнес, улица Камова 7а, Минск",
   },
   {
     icon: Phone,
