@@ -3,7 +3,7 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-12 max-w-3xl">
         <h1 className="font-heading text-3xl md:text-4xl font-bold mb-8">Политика конфиденциальности</h1>
-        <p className="text-muted-foreground mb-6 text-sm">Дата вступления в силу: 9 марта 2026 г.</p>
+        <p className="text-muted-foreground mb-6 text-sm">Дата вступления в силу: 15 января 2026 г.</p>
 
         <div className="space-y-8 text-foreground/80 leading-relaxed">
           <section>
