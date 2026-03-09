@@ -96,7 +96,7 @@ export const Footer = () => {
               <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
                 Договор публичной оферты
               </a>
-              <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
+              <a href="/privacy" className="text-foreground/60 hover:text-primary transition-colors">
                 Политика конфиденциальности
               </a>
             </div>
