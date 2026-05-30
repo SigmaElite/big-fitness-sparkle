@@ -55,7 +55,7 @@ export class ErrorBoundary extends Component<Props, State> {
               Произошла непредвиденная ошибка. Попробуйте перезагрузить страницу или вернуться на главную.
             </p>
 
-            {process.env.NODE_ENV === "development" && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <div className="bg-muted rounded-lg p-4 mb-6 text-left overflow-auto max-h-32">
                 <code className="text-xs text-destructive break-all">
                   {this.state.error.message}
