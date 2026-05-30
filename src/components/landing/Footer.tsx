@@ -106,6 +106,16 @@ export const Footer = () => {
               <span>© 2026 Big Fitness</span>
               <Heart className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary fill-primary" />
             </div>
+
+            {/* Developer credit */}
+            <a
+              href="https://code-lab-studio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/40 hover:text-primary transition-colors text-base md:text-lg font-medium"
+            >
+              Разработка и продвижение сайтов
+            </a>
           </div>
         </div>
       </div>
