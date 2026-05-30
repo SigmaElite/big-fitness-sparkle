@@ -75,7 +75,7 @@ export const About = () => {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
   const [showVideoControls, setShowVideoControls] = useState<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const hideControlsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const hideControlsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [galleryMedia, setGalleryMedia] = useState<MediaItem[]>(fallbackGallery);
   const [isLoading, setIsLoading] = useState(true);
 
