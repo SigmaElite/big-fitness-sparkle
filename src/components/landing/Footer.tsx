@@ -112,9 +112,21 @@ export const Footer = () => {
               href="https://code-lab-studio.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/40 hover:text-primary transition-colors text-base md:text-lg font-medium"
+              className="group flex items-center gap-1 text-primary hover:text-primary transition-colors text-base md:text-lg font-medium"
             >
-              Разработка и продвижение сайтов
+              <span>Разработка и продвижение сайтов</span>
+              <svg
+                className="w-0 h-5 group-hover:w-5 transition-all duration-300 ease-out overflow-hidden"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
             </a>
           </div>
         </div>
