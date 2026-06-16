@@ -11,6 +11,7 @@ import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import { Fake403 } from "@/components/Fake403";
 import { toast } from "@/hooks/use-toast";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
+          <Fake403 />
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
