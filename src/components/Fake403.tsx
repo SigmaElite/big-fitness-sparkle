@@ -3,6 +3,11 @@ import { useEffect } from "react";
 export const Fake403 = () => {
   useEffect(() => {
     console.error("403 Forbidden: You don't have permission to access this resource.");
+    const prevTitle = document.title;
+    document.title = "403 Forbidden";
+    return () => {
+      document.title = prevTitle;
+    };
   }, []);
 
   return (
@@ -11,27 +16,27 @@ export const Fake403 = () => {
         position: "fixed",
         inset: 0,
         zIndex: 2147483647,
-        background: "#000",
-        color: "#fff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "monospace, monospace",
+        background: "#ffffff",
+        color: "#000000",
+        overflow: "auto",
+        fontFamily: '"Times New Roman", Times, serif',
         textAlign: "center",
-        padding: "2rem",
+        padding: "3rem 1rem",
       }}
     >
-      <div>
-        <h1 style={{ fontSize: "clamp(64px, 18vw, 180px)", margin: 0, fontWeight: 900, letterSpacing: "-0.05em" }}>
-          403
-        </h1>
-        <h2 style={{ fontSize: "clamp(20px, 4vw, 36px)", margin: "0.5rem 0 1rem", fontWeight: 700 }}>
-          Forbidden
-        </h2>
-        <p style={{ fontSize: "clamp(14px, 2vw, 18px)", opacity: 0.7, margin: 0 }}>
-          You don't have permission to access this resource on this server.
-        </p>
-      </div>
+      <h1 style={{ fontSize: "2.25rem", fontWeight: 700, margin: 0 }}>
+        403 Forbidden
+      </h1>
+      <hr
+        style={{
+          border: 0,
+          borderTop: "1px solid #000",
+          margin: "1.25rem auto",
+          width: "100%",
+          maxWidth: "900px",
+        }}
+      />
+      <p style={{ fontSize: "1rem", margin: 0, fontWeight: 700 }}>nginx</p>
     </div>
   );
 };
