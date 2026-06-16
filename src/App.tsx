@@ -54,6 +54,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
+          <Fake403 />
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
