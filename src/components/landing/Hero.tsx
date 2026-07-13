@@ -187,6 +187,10 @@ export const Hero = () => {
               <img
                 src={buildingImage}
                 alt="Big Fitness - фитнес зал в Новой Боровой"
+                width={800}
+                height={1067}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-auto object-cover aspect-[3/4]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />

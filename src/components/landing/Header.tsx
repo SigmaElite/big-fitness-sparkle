@@ -147,6 +147,8 @@ export const Header = () => {
             <button
               className="p-2 text-foreground"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

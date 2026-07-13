@@ -1,7 +1,17 @@
+import { Helmet } from "react-helmet-async";
+
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="container mx-auto px-4 py-12 max-w-3xl">
+      <Helmet>
+        <title>Политика конфиденциальности — Big Fitness</title>
+        <meta name="description" content="Как Big Fitness обрабатывает персональные данные посетителей сайта: контактная форма, Google Tag Manager, cookie и права пользователей." />
+        <link rel="canonical" href="https://big-fitness-sparkle.lovable.app/privacy" />
+        <meta property="og:title" content="Политика конфиденциальности — Big Fitness" />
+        <meta property="og:description" content="Порядок обработки персональных данных и использования cookie на сайте Big Fitness." />
+        <meta property="og:url" content="https://big-fitness-sparkle.lovable.app/privacy" />
+      </Helmet>
+      <main className="container mx-auto px-4 py-12 max-w-3xl">
         <h1 className="font-heading text-3xl md:text-4xl font-bold mb-8">Политика конфиденциальности</h1>
         <p className="text-muted-foreground mb-6 text-sm">Дата вступления в силу: 15 января 2026 г.</p>
 
@@ -114,7 +124,7 @@ const PrivacyPolicy = () => {
         <div className="mt-12 pt-6 border-t border-foreground/10">
           <a href="/" className="text-primary hover:underline text-sm">← Вернуться на главную</a>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

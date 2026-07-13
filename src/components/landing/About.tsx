@@ -212,6 +212,7 @@ export const About = () => {
             variant="ghost"
             size="icon"
             onClick={prevPage}
+            aria-label="Предыдущие фотографии галереи"
             className="absolute left-1 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
           >
             <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
@@ -220,6 +221,7 @@ export const About = () => {
             variant="ghost"
             size="icon"
             onClick={nextPage}
+            aria-label="Следующие фотографии галереи"
             className="absolute right-1 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-12 md:h-12 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background shadow-lg border border-border"
           >
             <ChevronRight className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
@@ -249,8 +251,9 @@ export const About = () => {
                     {media.type === "image" ? (
                       <img
                         src={media.url}
-                        alt={media.title || "Gallery item"}
+                        alt={media.title || "Интерьер фитнес-студии Big Fitness в Новой Боровой"}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     ) : (
                       <>
@@ -265,6 +268,7 @@ export const About = () => {
                         />
                         <button
                           onClick={() => handleVideoClick(globalIndex, localIndex)}
+                          aria-label={playingVideo === globalIndex ? `Пауза видео: ${media.title || "тур по студии"}` : `Воспроизвести видео: ${media.title || "тур по студии"}`}
                           className="absolute inset-0 flex items-center justify-center transition-colors"
                           style={{ background: playingVideo === globalIndex ? 'transparent' : 'rgba(0,0,0,0.2)' }}
                         >
