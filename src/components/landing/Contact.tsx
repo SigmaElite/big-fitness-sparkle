@@ -272,25 +272,37 @@ export const Contact = () => {
               
               <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
                 <div>
+                  <label htmlFor="contact-name" className="sr-only">Ваше имя</label>
                   <input
+                    id="contact-name"
+                    name="name"
                     type="text"
                     placeholder="Ваше имя"
+                    aria-label="Ваше имя"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
                   />
                 </div>
                 <div>
+                  <label htmlFor="contact-phone" className="sr-only">Номер телефона</label>
                   <input
+                    id="contact-phone"
+                    name="phone"
                     type="tel"
                     placeholder="+375 (25) 123-45-67"
+                    aria-label="Номер телефона"
                     value={formData.phone}
                     onChange={handlePhoneChange}
                     className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors placeholder:text-muted-foreground text-sm md:text-base"
                   />
                 </div>
                 <div>
-                  <select 
+                  <label htmlFor="contact-direction" className="sr-only">Направление тренировок</label>
+                  <select
+                    id="contact-direction"
+                    name="direction"
+                    aria-label="Направление тренировок"
                     value={formData.direction}
                     onChange={(e) => setFormData({ ...formData, direction: e.target.value })}
                     className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-muted border-2 border-transparent focus:border-primary outline-none transition-colors text-muted-foreground text-sm md:text-base"
