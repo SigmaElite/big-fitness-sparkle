@@ -251,8 +251,9 @@ export const About = () => {
                     {media.type === "image" ? (
                       <img
                         src={media.url}
-                        alt={media.title || "Gallery item"}
+                        alt={media.title || "Интерьер фитнес-студии Big Fitness в Новой Боровой"}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     ) : (
                       <>
