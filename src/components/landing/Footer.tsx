@@ -54,7 +54,7 @@ export const Footer = () => {
             {/* Contact info */}
             <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm">
               <a
-                href="https://yandex.by/maps/-/CHEOeF~G"
+                href="https://yandex.by/maps/org/big_fitness/51317156243/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground/70 hover:text-primary transition-colors flex items-center gap-1"
