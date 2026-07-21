@@ -112,7 +112,7 @@ export const Header = () => {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="https://t.me/+375292788806"
+              href="https://t.me/bigfitness_newbor"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors"
@@ -130,7 +130,7 @@ export const Header = () => {
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
             <a
-              href="https://t.me/+375292788806"
+              href="https://t.me/bigfitness_newbor"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 px-2 py-1.5 text-primary"
@@ -184,7 +184,7 @@ export const Header = () => {
             
             {/* Telegram link for mobile */}
             <a
-              href="https://t.me/+375292788806"
+              href="https://t.me/bigfitness_newbor"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors py-2"
