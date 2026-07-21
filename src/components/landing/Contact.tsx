@@ -31,7 +31,7 @@ const contactInfo = [
 
 const socials = [
   { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/bigfitness_nb/" },
-  { icon: Send, label: "Telegram", href: "https://t.me/+375292788806" },
+  { icon: Send, label: "Telegram", href: "https://t.me/bigfitness_newbor" },
 ];
 
 export const Contact = () => {
